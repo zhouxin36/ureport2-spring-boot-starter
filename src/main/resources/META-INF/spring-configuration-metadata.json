@@ -23,6 +23,12 @@
       "type": "java.lang.String",
       "sourceType": "vip.zhouxin.ureport.core.config.UreportProperties",
       "description": "debug"
+    },
+    {
+      "name": "auto.dataSources",
+      "type": "java.util.List<vip.zhouxin.ureport.core.model.DataSource>",
+      "sourceType": "vip.zhouxin.ureport.core.config.UreportProperties",
+      "description": "数据源配置"
     }
   ]
 }

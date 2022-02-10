@@ -15,11 +15,13 @@
  ******************************************************************************/
 package vip.zhouxin.ureport.core;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import vip.zhouxin.ureport.core.build.Context;
+import vip.zhouxin.ureport.core.config.UreportProperties;
 import vip.zhouxin.ureport.core.definition.datasource.BuildinDatasource;
 import vip.zhouxin.ureport.core.definition.datasource.GenerateBuildinDatasource;
 import vip.zhouxin.ureport.core.exception.ConvertException;
@@ -31,6 +33,7 @@ import vip.zhouxin.ureport.core.utils.DateUtils;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -73,6 +76,31 @@ public class Utils implements ApplicationContextAware{
 			buildinDatasources= new ArrayList<>();
 			Collection<GenerateBuildinDatasource> datasources = Optional.of(applicationContext.getBeansOfType(GenerateBuildinDatasource.class)).map(Map::values).orElse(Collections.emptyList());
 			datasources.forEach(e-> buildinDatasources.addAll(e.generate()));
+			UreportProperties properties = applicationContext.getBean(UreportProperties.class);
+			Optional.of(properties).map(UreportProperties::getDataSources).orElse(Collections.emptyList()).forEach(e->{
+				DruidDataSource druidDataSource;
+				druidDataSource = new DruidDataSource();
+				druidDataSource.setUrl(e.getJdbcUrl());
+				druidDataSource.setUsername(e.getUsername());
+				druidDataSource.setPassword(e.getPassword());
+				druidDataSource.setDriverClassName(e.getDriverName());
+				buildinDatasources.add(new BuildinDatasource() {
+					@Override
+					public String name() {
+						return e.getTitle();
+					}
+
+					@Override
+					public Connection getConnection() {
+						try {
+							return druidDataSource.getConnection();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+						return null;
+					}
+				});
+			});
 		}
 		return buildinDatasources;
 	}

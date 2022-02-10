@@ -12,7 +12,6 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</sonatypeOssDistMgmtSnapshotsUrl>
 		<arguments />
 		<lang3.version>3.5</lang3.version>
 		<beanutils.core.version>1.8.3</beanutils.core.version>
@@ -350,12 +349,12 @@
 		<snapshotRepository>
 			<id>sonatype-nexus-snapshots</id>
 			<name>Sonatype Nexus Snapshots</name>
-			<url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
 		</snapshotRepository>
 		<repository>
 			<id>sonatype-nexus-staging</id>
 			<name>Nexus Release Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
 
@@ -363,7 +362,7 @@
 		<repository>
 			<id>sonatype-nexus-snapshots</id>
 			<name>Sonatype Nexus Snapshots</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
 			<releases>
 				<enabled>false</enabled>
 			</releases>

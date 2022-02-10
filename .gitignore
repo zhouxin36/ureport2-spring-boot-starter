@@ -22,3 +22,5 @@ ureport2-ui/.idea
 *.sln
 *.sw?
 .idea
+*.exe
+# mvn clean deploy -P sonatype-oss-release -Darguments="gpg.passphrase="
