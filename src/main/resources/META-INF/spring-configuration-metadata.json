@@ -1,0 +1,28 @@
+{	"groups": [
+  {
+    "name": "ureport",
+    "type": "vip.zhouxin.ureport.core.config.UreportProperties",
+    "sourceType": "vip.zhouxin.ureport.core.config.UreportProperties"
+  }
+],
+  "properties": [
+    {
+      "name": "ureport.fileStoreDir",
+      "type": "java.lang.String",
+      "sourceType": "vip.zhouxin.ureport.core.config.UreportProperties",
+      "description": "文件系统路径"
+    },
+    {
+      "name": "auto.disableFileProvider",
+      "type": "java.lang.String",
+      "sourceType": "vip.zhouxin.ureport.core.config.UreportProperties",
+      "description": "是否开启文件路径"
+    },
+    {
+      "name": "auto.debug",
+      "type": "java.lang.String",
+      "sourceType": "vip.zhouxin.ureport.core.config.UreportProperties",
+      "description": "debug"
+    }
+  ]
+}

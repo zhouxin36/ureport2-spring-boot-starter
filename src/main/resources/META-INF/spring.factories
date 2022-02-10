@@ -1,0 +1,10 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  vip.zhouxin.ureport.console.config.ControllerConfiguration,\
+  vip.zhouxin.ureport.font.FontConfiguration,\
+  vip.zhouxin.ureport.core.config.CoreConfiguration,\
+  vip.zhouxin.ureport.core.config.ComponentConfiguration,\
+  vip.zhouxin.ureport.core.config.ValueConfiguration,\
+  vip.zhouxin.ureport.core.config.DefinitionConfiguration,\
+  vip.zhouxin.ureport.core.config.ConditionConfiguration,\
+  vip.zhouxin.ureport.core.config.DatasetConfiguration,\
+  vip.zhouxin.ureport.core.config.UreportProperties

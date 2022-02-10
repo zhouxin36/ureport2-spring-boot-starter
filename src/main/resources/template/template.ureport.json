@@ -1,0 +1,173 @@
+{
+  "cells": [
+    {
+      "expand": "None",
+      "name": "A1",
+      "columnNumber": "1",
+      "rowNumber": "1",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    },
+    {
+      "expand": "None",
+      "name": "B1",
+      "columnNumber": "2",
+      "rowNumber": "1",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    },
+    {
+      "expand": "None",
+      "name": "C1",
+      "columnNumber": "3",
+      "rowNumber": "1",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    },
+    {
+      "expand": "None",
+      "name": "D1",
+      "columnNumber": "4",
+      "rowNumber": "1",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    },
+    {
+      "expand": "None",
+      "name": "A2",
+      "columnNumber": "1",
+      "rowNumber": "2",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    },
+    {
+      "expand": "None",
+      "name": "B2",
+      "columnNumber": "2",
+      "rowNumber": "2",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    },
+    {
+      "expand": "None",
+      "name": "C2",
+      "columnNumber": "3",
+      "rowNumber": "2",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    },
+    {
+      "expand": "None",
+      "name": "D2",
+      "columnNumber": "4",
+      "rowNumber": "2",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    },
+    {
+      "expand": "None",
+      "name": "A3",
+      "columnNumber": "1",
+      "rowNumber": "3",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    },
+    {
+      "expand": "None",
+      "name": "B3",
+      "columnNumber": "2",
+      "rowNumber": "3",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    },
+    {
+      "expand": "None",
+      "name": "C3",
+      "columnNumber": "3",
+      "rowNumber": "3",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    },
+    {
+      "expand": "None",
+      "name": "D3",
+      "columnNumber": "4",
+      "rowNumber": "3",
+      "cellStyle": {
+        "fontSize": "10",
+        "align": "center",
+        "valign": "middle"
+      }
+    }
+  ],
+  "rows": [
+    {
+      "rowNumber": "1",
+      "height": "18"
+    },
+    {
+      "rowNumber": "2",
+      "height": "18"
+    },
+    {
+      "rowNumber": "3",
+      "height": "18"
+    }
+  ],
+  "columns": [
+    {
+      "columnNumber": "1",
+      "width": "80"
+    },
+    {
+      "columnNumber": "2",
+      "width": "80"
+    },
+    {
+      "columnNumber": "3",
+      "width": "80"
+    },
+    {
+      "columnNumber": "4",
+      "width": "80"
+    }
+  ],
+  "paper": {
+    "paperType": "A4",
+    "orientation": "portrait",
+    "pagingMode": "fitpage"
+  }
+}
