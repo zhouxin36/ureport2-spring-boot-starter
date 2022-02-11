@@ -15,7 +15,7 @@
  ******************************************************************************/
 package vip.zhouxin.ureport.core.expression.function.math;
 
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.RandomUtils;
 import vip.zhouxin.ureport.core.build.Context;
 import vip.zhouxin.ureport.core.expression.model.data.ExpressionData;
 import vip.zhouxin.ureport.core.model.Cell;
@@ -38,7 +38,7 @@ public class RandomFunction extends MathFunction {
 		if(feed==0){
 			return Math.random();
 		}
-		return RandomUtils.nextInt(feed);
+		return RandomUtils.nextInt(0,feed);
 	}
 
 	@Override

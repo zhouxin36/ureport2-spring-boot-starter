@@ -9,7 +9,7 @@ import vip.zhouxin.ureport.core.export.ExportManager;
 import vip.zhouxin.ureport.core.export.ReportRender;
 import vip.zhouxin.ureport.core.model.Report;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

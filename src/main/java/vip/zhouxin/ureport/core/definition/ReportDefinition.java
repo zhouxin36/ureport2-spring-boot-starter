@@ -16,7 +16,7 @@
 package vip.zhouxin.ureport.core.definition;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import vip.zhouxin.ureport.core.build.Dataset;
 import vip.zhouxin.ureport.core.definition.datasource.DatasourceDefinition;
 import vip.zhouxin.ureport.core.definition.searchform.RenderContext;

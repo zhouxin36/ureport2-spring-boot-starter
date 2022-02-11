@@ -13,15 +13,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since 2022/1/23
  */
 @SpringBootApplication
+
 public class ConsoleApplication {
 
     public static void main(String[] args) {
-        if (System.getProperty("os.name").startsWith("Windows")) {
-            System.setProperty("ureport.fileStoreDir", "E:/ureportfiles");
-        } else {
-            System.setProperty("ureport.fileStoreDir", "/Users/zhouxin/Downloads");
-        }
-        System.setProperty("server.port", "9095");
         SpringApplication.run(ConsoleApplication.class, args);
     }
 

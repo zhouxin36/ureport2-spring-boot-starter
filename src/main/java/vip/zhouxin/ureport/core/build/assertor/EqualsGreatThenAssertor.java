@@ -15,7 +15,7 @@
  ******************************************************************************/
 package vip.zhouxin.ureport.core.build.assertor;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import vip.zhouxin.ureport.core.Utils;
 
 import java.math.BigDecimal;

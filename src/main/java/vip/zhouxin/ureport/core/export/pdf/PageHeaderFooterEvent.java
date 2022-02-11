@@ -20,7 +20,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import vip.zhouxin.ureport.core.build.paging.HeaderFooter;
 import vip.zhouxin.ureport.core.build.paging.Page;
 import vip.zhouxin.ureport.core.definition.Orientation;

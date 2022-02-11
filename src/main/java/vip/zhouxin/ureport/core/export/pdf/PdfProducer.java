@@ -20,7 +20,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import vip.zhouxin.ureport.core.build.paging.Page;
 import vip.zhouxin.ureport.core.chart.ChartData;
 import vip.zhouxin.ureport.core.definition.Alignment;

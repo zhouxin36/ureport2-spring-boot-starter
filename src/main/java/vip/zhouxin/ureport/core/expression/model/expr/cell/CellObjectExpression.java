@@ -15,7 +15,7 @@
  ******************************************************************************/
 package vip.zhouxin.ureport.core.expression.model.expr.cell;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import vip.zhouxin.ureport.core.Utils;
 import vip.zhouxin.ureport.core.build.Context;
 import vip.zhouxin.ureport.core.expression.model.data.ExpressionData;

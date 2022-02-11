@@ -22,7 +22,7 @@ import vip.zhouxin.ureport.core.export.html.HtmlReport;
 import vip.zhouxin.ureport.core.export.html.SearchFormData;
 import vip.zhouxin.ureport.core.model.Report;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

@@ -17,7 +17,7 @@ package vip.zhouxin.ureport.core.export.pdf;
 
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Phrase;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import vip.zhouxin.ureport.core.definition.CellStyle;
 import vip.zhouxin.ureport.core.export.pdf.font.FontBuilder;
 import vip.zhouxin.ureport.core.model.Cell;
