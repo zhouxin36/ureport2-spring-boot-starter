@@ -23,6 +23,7 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.xmlbeans.impl.xb.xmlschema.SpaceAttribute;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
+import org.springframework.util.CollectionUtils;
 import vip.zhouxin.ureport.core.build.paging.HeaderFooter;
 import vip.zhouxin.ureport.core.model.Report;
 
@@ -80,378 +81,106 @@ public class HeaderFooterBuilder {
 			ctp = CTP.Factory.newInstance();				
 			para=new XWPFParagraph(ctp, document);
 			para.setAlignment(ParagraphAlignment.LEFT);
-			paras.add(para);
-			List<String> list=splitHeaderFooterContent(left);
-			for(int i=0;i<list.size();i++){
-				String text=list.get(i);
-				if(text.equals("$[PAGE]")){
-					r1 = para.createRun();
-				    CTFldChar fldChar = r1.getCTR().addNewFldChar();
-				    fldChar.setFldCharType(STFldCharType.Enum.forString("begin"));
-					CTText ctText = r1.getCTR().addNewInstrText();
-					ctText.setStringValue("PAGE  \\* MERGEFORMAT");
-					ctText.setSpace(SpaceAttribute.Space.Enum.forString("preserve"));
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-					fldChar = r1.getCTR().addNewFldChar();
-					fldChar.setFldCharType(STFldCharType.Enum.forString("end"));					
-				}else if(text.equals("$[PAGES]")){
-					r1 = para.createRun();
-				    CTFldChar fldChar = r1.getCTR().addNewFldChar();
-				    fldChar.setFldCharType(STFldCharType.Enum.forString("begin"));
-					CTText ctText = r1.getCTR().addNewInstrText();
-					ctText.setStringValue("NUMPAGES  \\* MERGEFORMAT ");
-					ctText.setSpace(SpaceAttribute.Space.Enum.forString("preserve"));
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-					fldChar = r1.getCTR().addNewFldChar();
-					fldChar.setFldCharType(STFldCharType.Enum.forString("end"));
-				}else if(text.equals("$[DATE]")){
-					r1 = para.createRun();
-					r1.setText(date);
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-				}else if(text.equals("$[TIME]")){
-					r1 = para.createRun();
-					r1.setText(time);
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-				}else{
-					r1 = para.createRun();
-					r1.setText(text);
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-				}
-			}
+			doBuild(hf, paras, para, left, date, time);
 		}
 		if(StringUtils.isNotBlank(center)){
 			ctp = CTP.Factory.newInstance();				
 			para=new XWPFParagraph(ctp, document);
 			para.setAlignment(ParagraphAlignment.CENTER);
-			paras.add(para);
-			List<String> list=splitHeaderFooterContent(center);
-			for(int i=0;i<list.size();i++){
-				String text=list.get(i);
-				if(text.equals("$[PAGE]")){
-					r1 = para.createRun();
-				    CTFldChar fldChar = r1.getCTR().addNewFldChar();
-				    fldChar.setFldCharType(STFldCharType.Enum.forString("begin"));
-					CTText ctText = r1.getCTR().addNewInstrText();
-					ctText.setStringValue("PAGE  \\* MERGEFORMAT");
-					ctText.setSpace(SpaceAttribute.Space.Enum.forString("preserve"));
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-					fldChar = r1.getCTR().addNewFldChar();
-					fldChar.setFldCharType(STFldCharType.Enum.forString("end"));					
-				}else if(text.equals("$[PAGES]")){
-					r1 = para.createRun();
-				    CTFldChar fldChar = r1.getCTR().addNewFldChar();
-				    fldChar.setFldCharType(STFldCharType.Enum.forString("begin"));
-					CTText ctText = r1.getCTR().addNewInstrText();
-					ctText.setStringValue("NUMPAGES  \\* MERGEFORMAT ");
-					ctText.setSpace(SpaceAttribute.Space.Enum.forString("preserve"));
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-					fldChar = r1.getCTR().addNewFldChar();
-					fldChar.setFldCharType(STFldCharType.Enum.forString("end"));
-				}else if(text.equals("$[DATE]")){
-					r1 = para.createRun();
-					r1.setText(date);
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-				}else if(text.equals("$[TIME]")){
-					r1 = para.createRun();
-					r1.setText(time);
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-				}else{
-					r1 = para.createRun();
-					r1.setText(text);
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-				}
-			}
+			doBuild(hf, paras, para, center, date, time);
 		}
 		if(StringUtils.isNotBlank(right)){
 			ctp = CTP.Factory.newInstance();				
 			para=new XWPFParagraph(ctp, document);
 			para.setAlignment(ParagraphAlignment.RIGHT);
-			paras.add(para);
-			List<String> list=splitHeaderFooterContent(right);
-			for(int i=0;i<list.size();i++){
-				String text=list.get(i);
-				if(text.equals("$[PAGE]")){
-					r1 = para.createRun();
-				    CTFldChar fldChar = r1.getCTR().addNewFldChar();
-				    fldChar.setFldCharType(STFldCharType.Enum.forString("begin"));
-					CTText ctText = r1.getCTR().addNewInstrText();
-					ctText.setStringValue("PAGE  \\* MERGEFORMAT");
-					ctText.setSpace(SpaceAttribute.Space.Enum.forString("preserve"));
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-					fldChar = r1.getCTR().addNewFldChar();
-					fldChar.setFldCharType(STFldCharType.Enum.forString("end"));					
-				}else if(text.equals("$[PAGES]")){
-					r1 = para.createRun();
-				    CTFldChar fldChar = r1.getCTR().addNewFldChar();
-				    fldChar.setFldCharType(STFldCharType.Enum.forString("begin"));
-					CTText ctText = r1.getCTR().addNewInstrText();
-					ctText.setStringValue("NUMPAGES  \\* MERGEFORMAT ");
-					ctText.setSpace(SpaceAttribute.Space.Enum.forString("preserve"));
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-					fldChar = r1.getCTR().addNewFldChar();
-					fldChar.setFldCharType(STFldCharType.Enum.forString("end"));
-				}else if(text.equals("$[DATE]")){
-					r1 = para.createRun();
-					r1.setText(date);
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-				}else if(text.equals("$[TIME]")){
-					r1 = para.createRun();
-					r1.setText(time);
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-				}else{
-					r1 = para.createRun();
-					r1.setText(text);
-					if(hf.getFontSize()>1){
-						r1.setFontSize(hf.getFontSize());
-					}
-					CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
-					CTFonts fonts = rpr.isSetRFonts() ? rpr.getRFonts() : rpr.addNewRFonts();
-					String fontName=hf.getFontFamily();
-					if(fontName!=null){
-						fonts.setAscii(fontName);
-						fonts.setEastAsia(fontName);
-						fonts.setHAnsi(fontName);
-					}
-					if(hf.isBold()){
-						r1.setBold(true);
-					}
-					if(hf.isItalic()){
-						r1.setItalic(true);
-					}
-				}
-			}
+			doBuild(hf, paras, para, right, date, time);
 		}
 		return paras;
 	}
-	
+
+	private void doBuild(HeaderFooter hf, List<XWPFParagraph> paras, XWPFParagraph para, String left, String date, String time) {
+		XWPFRun r1;
+		paras.add(para);
+		List<String> list=splitHeaderFooterContent(left);
+		for (String text : list) {
+			switch (text) {
+				case "$[PAGE]": {
+					r1 = para.createRun();
+					CTFldChar fldChar = r1.getCTR().addNewFldChar();
+					fldChar.setFldCharType(STFldCharType.Enum.forString("begin"));
+					CTText ctText = r1.getCTR().addNewInstrText();
+					ctText.setStringValue("PAGE  \\* MERGEFORMAT");
+					ctText.setSpace(SpaceAttribute.Space.Enum.forString("preserve"));
+					doCtrpr(hf, r1);
+					fldChar = r1.getCTR().addNewFldChar();
+					fldChar.setFldCharType(STFldCharType.Enum.forString("end"));
+					break;
+				}
+				case "$[PAGES]": {
+					r1 = para.createRun();
+					CTFldChar fldChar = r1.getCTR().addNewFldChar();
+					fldChar.setFldCharType(STFldCharType.Enum.forString("begin"));
+					CTText ctText = r1.getCTR().addNewInstrText();
+					ctText.setStringValue("NUMPAGES  \\* MERGEFORMAT ");
+					ctText.setSpace(SpaceAttribute.Space.Enum.forString("preserve"));
+					doCtrpr(hf, r1);
+					fldChar = r1.getCTR().addNewFldChar();
+					fldChar.setFldCharType(STFldCharType.Enum.forString("end"));
+					break;
+				}
+				case "$[DATE]": {
+					r1 = para.createRun();
+					r1.setText(date);
+					doCtrpr(hf, r1);
+					break;
+				}
+				case "$[TIME]": {
+					r1 = para.createRun();
+					r1.setText(time);
+					doCtrpr(hf, r1);
+					break;
+				}
+				default: {
+					r1 = para.createRun();
+					r1.setText(text);
+					doCtrpr(hf, r1);
+					break;
+				}
+			}
+		}
+	}
+
+
+	private void doCtrpr(HeaderFooter hf, XWPFRun r1) {
+		if (hf.getFontSize() > 1) {
+			r1.setFontSize(hf.getFontSize());
+		}
+		CTRPr rpr = r1.getCTR().isSetRPr() ? r1.getCTR().getRPr() : r1.getCTR().addNewRPr();
+		List<CTFonts> rFontsList = rpr.getRFontsList();
+		CTFonts fonts;
+		if (CollectionUtils.isEmpty(rFontsList)){
+			fonts = rpr.addNewRFonts();
+		}else {
+			fonts = rFontsList.get(0);
+		}
+		String fontName = hf.getFontFamily();
+		if (fontName != null) {
+			fonts.setAscii(fontName);
+			fonts.setEastAsia(fontName);
+			fonts.setHAnsi(fontName);
+		}
+		if (hf.isBold()) {
+			r1.setBold(true);
+		}
+		if (hf.isItalic()) {
+			r1.setItalic(true);
+		}
+	}
+
 	private List<String> splitHeaderFooterContent(String info){
 		Pattern pattern = Pattern.compile("\\$\\[PAGE\\]|\\$\\[PAGES\\]|\\$\\[DATE\\]|\\$\\[TIME\\]");
 		Matcher matcher = pattern.matcher(info);
-		List<String> list=new ArrayList<String>();
+		List<String> list= new ArrayList<>();
 		int start=0;
 		while (matcher.find()) {
 			String text=matcher.group();
@@ -462,7 +191,7 @@ public class HeaderFooterBuilder {
 			list.add(text);
 		}
 		if(start<info.length()){
-			list.add(info.substring(start,info.length()));
+			list.add(info.substring(start));
 		}
 		return list;
 	}

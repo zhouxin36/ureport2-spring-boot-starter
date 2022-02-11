@@ -15,7 +15,7 @@
  ******************************************************************************/
 package vip.zhouxin.ureport.core.expression;
 
-import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -103,8 +103,7 @@ public class ExpressionUtils implements ApplicationContextAware{
 	}
 	
 	public static Expression parseExpression(String text){
-		ANTLRInputStream antlrInputStream=new ANTLRInputStream(text);
-		ReportParserLexer lexer=new ReportParserLexer(antlrInputStream);
+		ReportParserLexer lexer=new ReportParserLexer(CharStreams.fromString(text));
 		CommonTokenStream tokenStream=new CommonTokenStream(lexer);
 		ReportParserParser parser=new ReportParserParser(tokenStream);
 		ExpressionErrorListener errorListener=new ExpressionErrorListener();

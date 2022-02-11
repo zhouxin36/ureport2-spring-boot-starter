@@ -49,7 +49,7 @@ public class FileReportProvider implements ReportProvider,ApplicationContextAwar
 	@Override
 	public InputStream loadReport(String file) {
 		if(file.startsWith(prefix)){
-			file=file.substring(prefix.length(),file.length());
+			file=file.substring(prefix.length());
 		}
 		String fullPath=fileStoreDir+"/"+file;
 		try {
@@ -62,7 +62,7 @@ public class FileReportProvider implements ReportProvider,ApplicationContextAwar
 	@Override
 	public void deleteReport(String file) {
 		if(file.startsWith(prefix)){
-			file=file.substring(prefix.length(),file.length());
+			file=file.substring(prefix.length());
 		}
 		String fullPath=fileStoreDir+"/"+file;
 		File f=new File(fullPath);
@@ -80,12 +80,7 @@ public class FileReportProvider implements ReportProvider,ApplicationContextAwar
 			calendar.setTimeInMillis(f.lastModified());
 			list.add(new ReportFile(f.getName(),calendar.getTime()));
 		}
-		Collections.sort(list, new Comparator<ReportFile>(){
-			@Override
-			public int compare(ReportFile f1, ReportFile f2) {
-				return f2.getUpdateDate().compareTo(f1.getUpdateDate());
-			}
-		});
+		list.sort((f1, f2) -> f2.getUpdateDate().compareTo(f1.getUpdateDate()));
 		return list;
 	}
 
@@ -97,7 +92,7 @@ public class FileReportProvider implements ReportProvider,ApplicationContextAwar
 	@Override
 	public void saveReport(String file,String content) {
 		if(file.startsWith(prefix)){
-			file=file.substring(prefix.length(),file.length());
+			file=file.substring(prefix.length());
 		}
 		String fullPath=fileStoreDir+"/"+file;
 		FileOutputStream outStream=null;

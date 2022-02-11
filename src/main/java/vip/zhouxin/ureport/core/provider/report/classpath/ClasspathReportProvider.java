@@ -41,9 +41,9 @@ public class ClasspathReportProvider implements ReportProvider,ApplicationContex
 		} catch (IOException e) {
 			String newFileName=null;
 			if(file.startsWith("classpath:")){
-				newFileName="classpath*:"+file.substring(10,file.length());
+				newFileName="classpath*:"+file.substring(10);
 			}else if(file.startsWith("classpath*:")){
-				newFileName="classpath:"+file.substring(11,file.length());
+				newFileName="classpath:"+file.substring(11);
 			}
 			if(newFileName!=null){
 				try{
@@ -80,7 +80,7 @@ public class ClasspathReportProvider implements ReportProvider,ApplicationContex
 	
 	@Override
 	public String getName() {
-		return "classpath";
+		return null;
 	}
 	
 	@Override

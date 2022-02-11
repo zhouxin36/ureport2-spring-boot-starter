@@ -1,25 +1,19 @@
 package vip.zhouxin.ureport.console.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import vip.zhouxin.ureport.console.importexcel.ExcelParser;
 import vip.zhouxin.ureport.console.importexcel.HSSFExcelParser;
 import vip.zhouxin.ureport.console.importexcel.XSSFExcelParser;
 import vip.zhouxin.ureport.core.definition.ReportDefinition;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import vip.zhouxin.ureport.core.provider.report.file.CacheReportProvider;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author xinxingzhou
@@ -30,46 +24,45 @@ public class ImportExcelController extends AbstractController {
     public static final String PREFIX = CONTENT + "/import";
 
     private final List<ExcelParser> excelParsers = new ArrayList<>();
+    private final CacheReportProvider reportProvider;
 
-    public ImportExcelController(ObjectMapper objectMapper) {
+    public ImportExcelController(ObjectMapper objectMapper, CacheReportProvider reportProvider) {
         super(objectMapper);
+        this.reportProvider = reportProvider;
         excelParsers.add(new HSSFExcelParser());
         excelParsers.add(new XSSFExcelParser());
     }
 
 
     @RequestMapping(value = PREFIX, method = RequestMethod.POST)
-    public Map<String, Object> loadMethods(HttpServletRequest req) {
-        String tempDir = System.getProperty("java.io.tmpdir");
-        FileItemFactory factory = new DiskFileItemFactory(1000240, new File(tempDir));
-        ServletFileUpload upload = new ServletFileUpload(factory);
+    public Map<String, Object> loadMethods(@RequestParam("_excel_file") MultipartFile file) {
         ReportDefinition report = null;
         String errorInfo;
+        String name = file.getOriginalFilename();
         try {
-            List<FileItem> items = upload.parseRequest(req);
-            for (FileItem item : items) {
-                String fieldName = item.getFieldName();
-                String name = item.getName().toLowerCase();
-                if (fieldName.equals("_excel_file") && (name.endsWith(".xls") || name.endsWith(".xlsx"))) {
-                    InputStream inputStream = item.getInputStream();
-                    for (ExcelParser parser : excelParsers) {
-                        if (parser.support(name)) {
-                            report = parser.parse(inputStream);
-                            break;
-                        }
+            if (name != null && (name.endsWith(".xls") || name.endsWith(".xlsx"))) {
+                InputStream inputStream = file.getInputStream();
+                for (ExcelParser parser : excelParsers) {
+                    if (parser.support(name)) {
+                        report = parser.parse(inputStream);
+                        String fileName = UUID.randomUUID().toString().toLowerCase(Locale.ROOT).replaceAll("-","")+".json";
+                        report.setReportFullName(fileName);
+                        reportProvider.saveReport(fileName, objectMapper.writeValueAsString(report));
+                        break;
                     }
-                    inputStream.close();
-                    break;
                 }
+                inputStream.close();
             }
             errorInfo = "请选择一个合法的Excel导入";
         } catch (Exception e) {
             e.printStackTrace();
             errorInfo = e.getMessage();
         }
+
         Map<String, Object> result = new HashMap<>();
         if (report != null) {
             result.put("result", true);
+            result.put("message", report.getReportFullName());
         } else {
             result.put("result", false);
             if (errorInfo != null) {

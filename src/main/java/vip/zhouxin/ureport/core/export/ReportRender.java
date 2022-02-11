@@ -92,7 +92,7 @@ public class ReportRender implements ApplicationContextAware{
 	public ReportDefinition parseReport(String file){
 		try(InputStream inputStream = buildReportFile(file)) {
 			return objectMapper.readValue(Optional.of(IOUtils.readLines(inputStream
-											, StandardCharsets.UTF_8)).map(e -> String.join("", e)).orElse("{}")
+											, StandardCharsets.UTF_8.displayName())).map(e -> String.join("", e)).orElse("{}")
 							, ReportDefinition.class);
 		}catch (Exception ex){
 			throw new ReportException(ex);

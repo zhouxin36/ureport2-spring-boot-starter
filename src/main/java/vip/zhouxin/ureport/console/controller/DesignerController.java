@@ -15,7 +15,7 @@ import vip.zhouxin.ureport.core.expression.ErrorInfo;
 import vip.zhouxin.ureport.core.expression.ScriptErrorListener;
 import vip.zhouxin.ureport.core.provider.report.ReportProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -58,8 +58,7 @@ public class DesignerController extends AbstractController implements Applicatio
   }
 
   private List<ErrorInfo> scriptValidation(ContentReq req, Consumer<ReportParserParser> consumer) {
-    ANTLRInputStream antlrInputStream = new ANTLRInputStream(req.getContent());
-    ReportParserLexer lexer = new ReportParserLexer(antlrInputStream);
+    ReportParserLexer lexer = new ReportParserLexer(CharStreams.fromString(req.getContent()));
     CommonTokenStream tokenStream = new CommonTokenStream(lexer);
     ReportParserParser parser = new ReportParserParser(tokenStream);
     ScriptErrorListener errorListener = new ScriptErrorListener();
@@ -72,8 +71,7 @@ public class DesignerController extends AbstractController implements Applicatio
 
   @RequestMapping(value = PREFIX + "/parseDatasetName", method = RequestMethod.POST)
   public ParseDatasetNameRes parseDatasetName(@RequestBody ParseDatasetNameReq req) {
-    ANTLRInputStream antlrInputStream = new ANTLRInputStream(req.getExpr());
-    ReportParserLexer lexer = new ReportParserLexer(antlrInputStream);
+    ReportParserLexer lexer = new ReportParserLexer(CharStreams.fromString(req.getExpr()));
     CommonTokenStream tokenStream = new CommonTokenStream(lexer);
     ReportParserParser parser = new ReportParserParser(tokenStream);
     parser.removeErrorListeners();

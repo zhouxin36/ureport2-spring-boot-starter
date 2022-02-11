@@ -24,6 +24,7 @@ import vip.zhouxin.ureport.core.provider.image.DefaultImageProvider;
 import vip.zhouxin.ureport.core.provider.image.HttpImageProvider;
 import vip.zhouxin.ureport.core.provider.image.HttpsImageProvider;
 import vip.zhouxin.ureport.core.provider.report.classpath.ClasspathReportProvider;
+import vip.zhouxin.ureport.core.provider.report.file.CacheReportProvider;
 import vip.zhouxin.ureport.core.provider.report.file.FileReportProvider;
 import vip.zhouxin.ureport.core.utils.DateUtils;
 
@@ -55,6 +56,10 @@ public class CoreConfiguration {
     @Bean
     public FileReportProvider fileReportProvider(UreportProperties ureportProperties) {
         return new FileReportProvider(ureportProperties.getFileStoreDir(), ureportProperties.getDisableFileProvider());
+    }
+    @Bean
+    public CacheReportProvider cacheReportProvider() {
+        return new CacheReportProvider();
     }
 
     @Bean

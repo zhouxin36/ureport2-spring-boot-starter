@@ -162,13 +162,13 @@ public class ExcelBuilderWithPaging extends ExcelBuilder {
 			    				int leftMargin=0,topMargin=0;
 			    				int wholeWidth=getWholeWidth(columns, i, cellInfo.getColSpan());
 			    				int wholeHeight=getWholeHeight(rows, rowIndex, cellInfo.getRowSpan());
-			    				HorizontalAlignment align=style.getAlignmentEnum();
+			    				HorizontalAlignment align=style.getAlignment();
 			    				if(align.equals(HorizontalAlignment.CENTER)){
 			    					leftMargin=(wholeWidth-width)/2;
 			    				}else if(align.equals(HorizontalAlignment.RIGHT)){
 			    					leftMargin=wholeWidth-width;
 			    				}
-			    				VerticalAlignment valign=style.getVerticalAlignmentEnum();
+			    				VerticalAlignment valign=style.getVerticalAlignment();
 			    				if(valign.equals(VerticalAlignment.CENTER)){
 			    					topMargin=(wholeHeight-height)/2;
 			    				}else if(valign.equals(VerticalAlignment.BOTTOM)){
@@ -207,13 +207,13 @@ public class ExcelBuilderWithPaging extends ExcelBuilder {
 				    				int leftMargin=0,topMargin=0;
 				    				int wholeWidth=getWholeWidth(columns, i, cellInfo.getColSpan());
 				    				int wholeHeight=getWholeHeight(rows, rowIndex, cellInfo.getRowSpan());
-				    				HorizontalAlignment align=style.getAlignmentEnum();
+				    				HorizontalAlignment align=style.getAlignment();
 				    				if(align.equals(HorizontalAlignment.CENTER)){
 				    					leftMargin=(wholeWidth-width)/2;
 				    				}else if(align.equals(HorizontalAlignment.RIGHT)){
 				    					leftMargin=wholeWidth-width;
 				    				}
-				    				VerticalAlignment valign=style.getVerticalAlignmentEnum();
+				    				VerticalAlignment valign=style.getVerticalAlignment();
 				    				if(valign.equals(VerticalAlignment.CENTER)){
 				    					topMargin=(wholeHeight-height)/2;
 				    				}else if(valign.equals(VerticalAlignment.BOTTOM)){

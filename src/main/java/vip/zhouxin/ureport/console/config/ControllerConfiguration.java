@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import vip.zhouxin.ureport.core.provider.report.file.CacheReportProvider;
 
 /**
  * @author xinxingzhou
@@ -63,8 +64,8 @@ public class ControllerConfiguration {
     }
 
     @Bean
-    public ImportExcelController importExcelController() {
-        return new ImportExcelController(objectMapper);
+    public ImportExcelController importExcelController(CacheReportProvider reportProvider) {
+        return new ImportExcelController(objectMapper,reportProvider);
     }
 
     @Bean
