@@ -67,7 +67,7 @@ export default class OpenDialog{
                     confirm(`${window.i18n.dialog.open.openConfirm}[${file.name}]？`,function(){
                         let fullFile=value+encodeURI(file.name);
                         let path="designer?template="+fullFile;
-                        window.open(path,"_self");
+                        window.open("/#/"+path,"_blank");
                     });
                 });
 

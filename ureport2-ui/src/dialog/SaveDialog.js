@@ -129,7 +129,7 @@ export default class SaveDialog{
                     _this.dialog.modal('hide');
                     let path="designer?template="+window._reportFile;
                     confirm(`另存为成功，是否打开另存为文件`,function (){
-                        window.open(path, "_self");
+                        window.open("/#/"+path, "_blank");
                     });
                 },
                 error:function(response){

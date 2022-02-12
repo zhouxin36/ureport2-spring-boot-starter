@@ -168,7 +168,7 @@ export function previewInit() {
                     button.click(function () {
                         const urlParameters = buildLocationSearchParameters();
                         const url = window._server + '/pdf' + urlParameters;
-                        window.open(url, '_blank');
+                        window.open("/#/"+url, '_blank');
                     })
                 }
                 if (message.tools.word == true) {
@@ -180,7 +180,7 @@ export function previewInit() {
                     button.click(function () {
                         const urlParameters = buildLocationSearchParameters();
                         const url = window._server + '/word' + urlParameters;
-                        window.open(url, '_blank');
+                        window.open("/#/"+url, '_blank');
                     })
                 }
                 if (message.tools.excel == true) {
@@ -192,7 +192,7 @@ export function previewInit() {
                     button.click(function () {
                         const urlParameters = buildLocationSearchParameters();
                         const url = window._server + '/excel' + urlParameters;
-                        window.open(url, '_blank');
+                        window.open("/#/"+url, '_blank');
                     })
                 }
                 if (message.tools.pagingExcel == true) {
@@ -204,7 +204,7 @@ export function previewInit() {
                     button.click(function () {
                         const urlParameters = buildLocationSearchParameters();
                         const url = window._server + '/excel/paging' + urlParameters;
-                        window.open(url, '_blank');
+                        window.open("/#/"+url, '_blank');
                     })
                 }
                 if (message.tools.sheetPagingExcel == true) {
@@ -217,7 +217,7 @@ export function previewInit() {
                     button.click(function () {
                         const urlParameters = buildLocationSearchParameters();
                         const url = window._server + '/excel/sheet' + urlParameters;
-                        window.open(url, '_blank');
+                        window.open("/#/"+url, '_blank');
                     })
                 }
                 if (message.tools.paging == true) {
@@ -233,17 +233,19 @@ export function previewInit() {
                         `                <span class="caret"></span>\n` +
                         `            </button>`)
                     var ul = $(`<ul class="dropdown-menu" role="menu"></ul>`)
+                    let previewUrl;
+                    let pagePreviewUrl;
                     if (message.hasTools) {
-                        ul.append(`<li><a href="preview?template=` + message.file + `&tools=` + message.toolsInfo + param + `"\n` +
-                            `                       style="color:#337ab7">预览</a></li>`)
-                        ul.append(`<li><a href="preview?template=` + message.file + `&pageIndex=1&tools=` + message.toolsInfo + param + `"\n` +
-                            `                       style="color:#337ab7">分页预览</a></li>`)
+                        previewUrl = "/#/preview?template="+ message.file + `&tools=` + message.toolsInfo + param;
+                        pagePreviewUrl = "/#/preview?template="+ message.file + `&pageIndex=1&tools=` + message.toolsInfo + param;
                     } else {
-                        ul.append(`<li><a href="preview?template=` + message.file + param + `" style="color:#337ab7">预览</a>\n` +
-                            `                </li>`)
-                        ul.append(` <li><a href="preview?template=` + message.file + `&pageIndex=1` + param + `" style="color:#337ab7">分页预览</a>\n` +
-                            `                </li>`)
+                        previewUrl = "/#/preview?template="+ message.file + param;
+                        pagePreviewUrl = "/#/preview?template="+ message.file + `&pageIndex=1` + param;
                     }
+                    ul.append(`<li><a target="_blank" href="` + previewUrl + `" style="color:#337ab7">预览</a>\n` +
+                        `                </li>`)
+                    ul.append(` <li><a target="_blank" href="` + pagePreviewUrl + `" style="color:#337ab7">分页预览</a>\n` +
+                        `                </li>`)
                     btn.append(ul)
                     div2.append(btn)
                 }
@@ -318,6 +320,9 @@ window.buildLocationSearchParameters = function (exclude) {
     if (urlParameters.length > 0) {
         urlParameters = urlParameters.substring(1, urlParameters.length);
     }
+    if (urlParameters==='' || urlParameters === undefined || urlParameters === null){
+        urlParameters = window.location.href.replaceAll("#/","").split("?")[1];
+    }
     let parameters = {};
     const pairs = urlParameters.split('&');
     for (let i = 0; i < pairs.length; i++) {
@@ -359,6 +364,9 @@ window.buildLocationSearchBody = function (exclude) {
     let urlParameters = window.location.search;
     if (urlParameters.length > 0) {
         urlParameters = urlParameters.substring(1, urlParameters.length);
+    }
+    if (urlParameters==='' || urlParameters === undefined || urlParameters === null){
+        urlParameters = window.location.href.replaceAll("#/","").split("?")[1];
     }
     let parameters = {};
     const pairs = urlParameters.split('&');
@@ -446,7 +454,7 @@ window.buildPaging = function (pageIndex, totalPage) {
     pageSelector.change(function () {
         const parameters = window.buildLocationSearchParameters('pageIndex');
         let url = `/preview${parameters}&pageIndex=${$(this).val()}`;
-        window.open(url, '_self');
+        window.open("/#/"+url, '_blank');
     });
     pageSelector.val(pageIndex);
     if (totalPage === 1) {
@@ -460,7 +468,7 @@ window.buildPaging = function (pageIndex, totalPage) {
         const prevPage = $(`<button type="button" class="btn btn-link btn-sm">上一页</button>`);
         pagingContainer.append(prevPage);
         prevPage.click(function () {
-            window.open(url, '_self');
+            window.open("/#/"+url, '_blank');
         });
     }
     if (pageIndex < totalPage) {
@@ -468,7 +476,7 @@ window.buildPaging = function (pageIndex, totalPage) {
         const nextPage = $(`<button type="button" class="btn btn-link btn-sm">下一页</button>`);
         pagingContainer.append(nextPage);
         nextPage.click(function () {
-            window.open(url, '_self');
+            window.open("/#/"+url, '_blank');
         });
     }
 };

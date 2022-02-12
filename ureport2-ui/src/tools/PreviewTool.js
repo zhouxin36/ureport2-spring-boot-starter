@@ -53,7 +53,7 @@ export default class PreviewTool extends Tool{
             type:'POST',
             data:JSON.stringify(tableToJson(window._reportFile,this.context)),
             success:function(){
-                let newWindow=window.open(targetUrl,"_blank");
+                let newWindow=window.open("/#/"+targetUrl,"_blank");
                 newWindow.focus();
             },
             error:function(){

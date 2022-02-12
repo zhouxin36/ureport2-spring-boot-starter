@@ -10,25 +10,25 @@
       "name": "ureport.fileStoreDir",
       "type": "java.lang.String",
       "sourceType": "vip.zhouxin.ureport.core.config.UreportProperties",
-      "description": "文件系统路径"
+      "description": "文件系统路径."
     },
     {
       "name": "auto.disableFileProvider",
       "type": "java.lang.String",
       "sourceType": "vip.zhouxin.ureport.core.config.UreportProperties",
-      "description": "是否开启文件路径"
+      "description": "是否开启文件路径."
     },
     {
       "name": "auto.debug",
       "type": "java.lang.String",
       "sourceType": "vip.zhouxin.ureport.core.config.UreportProperties",
-      "description": "debug"
+      "description": "debug."
     },
     {
       "name": "auto.dataSources",
       "type": "java.util.List<vip.zhouxin.ureport.core.model.DataSource>",
       "sourceType": "vip.zhouxin.ureport.core.config.UreportProperties",
-      "description": "数据源配置"
+      "description": "数据源配置."
     }
   ]
 }
