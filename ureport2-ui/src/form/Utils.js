@@ -4,6 +4,7 @@
 import Component from './component/Component.js';
 import TabControlInstance from './instance/TabControlInstance.js';
 import ContainerInstance from './instance/ContainerInstance.js';
+import bootbox from "bootbox";
 export default class Utils{
     static seq(id){
         var seqValue;

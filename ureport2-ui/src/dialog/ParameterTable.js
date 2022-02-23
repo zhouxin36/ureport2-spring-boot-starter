@@ -31,7 +31,7 @@ export default class ParameterTable{
                 newTr.append(typeTd);
                 newTr.append(defaultValueTd);
                 const opTd=$(`<td style="vertical-align: middle"></td>`);
-                const removeSpan=$(`<span><a href="###"><i class="glyphicon glyphicon-trash" title="${window.i18n.dialog.paramTable.delParam}" style="font-size: 12pt;color: #d30a16;"></a></span>`);
+                const removeSpan=$(`<span><a ><i class="glyphicon glyphicon-trash" title="${window.i18n.dialog.paramTable.delParam}" style="font-size: 12pt;color: #d30a16;"></a></span>`);
                 opTd.append(removeSpan);
                 newTr.append(opTd);
                 _this.body.append(newTr);
@@ -40,7 +40,7 @@ export default class ParameterTable{
                     _this.data.splice(index,1);
                     newTr.remove();
                 });
-                const editSpan=$(`<span><a href="###"><i class="glyphicon glyphicon-edit" title="${window.i18n.dialog.paramTable.editParam}" style="font-size: 12pt;color: #005fd3;margin-left: 10px"></a></span>`);
+                const editSpan=$(`<span><a ><i class="glyphicon glyphicon-edit" title="${window.i18n.dialog.paramTable.editParam}" style="font-size: 12pt;color: #005fd3;margin-left: 10px"></a></span>`);
                 opTd.append(editSpan);
                 editSpan.click(function(){
                     _this.parameterDialog.show(function(name,type,defaultValue){
@@ -72,7 +72,7 @@ export default class ParameterTable{
             tr.append(defaultValueTd);
 
             const opTd=$(`<td style="vertical-align: middle"></td>`);
-            const deleteSpan=$(`<span><a href="###"><i class="glyphicon glyphicon-trash" title="${window.i18n.dialog.paramTable.delParam}" style="font-size: 12pt;color: #d30a16;"></a></span>`);
+            const deleteSpan=$(`<span><a ><i class="glyphicon glyphicon-trash" title="${window.i18n.dialog.paramTable.delParam}" style="font-size: 12pt;color: #d30a16;"></a></span>`);
             opTd.append(deleteSpan);
             tr.append(opTd);
             deleteSpan.click(function(){
@@ -82,7 +82,7 @@ export default class ParameterTable{
             });
             this.body.append(tr);
 
-            const editSpan=$(`<span><a href="###"><i class="glyphicon glyphicon-edit" title="${window.i18n.dialog.paramTable.editParam}" style="font-size: 12pt;color: #005fd3;margin-left: 10px"></a></span>`);
+            const editSpan=$(`<span><a ><i class="glyphicon glyphicon-edit" title="${window.i18n.dialog.paramTable.editParam}" style="font-size: 12pt;color: #005fd3;margin-left: 10px"></a></span>`);
             opTd.append(editSpan);
             editSpan.click(function(){
                 _this.parameterDialog.show(function(name,type,defaultValue){

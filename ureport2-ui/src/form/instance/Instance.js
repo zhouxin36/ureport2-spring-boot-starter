@@ -38,6 +38,9 @@ export default class Instance{
             this.inputElement.addClass(Instance.POS_CLASSES[1]);
         }
     }
+    setRefreshOnChange(refresh){
+        this.refreshOnChange=refresh;
+    }
     setBindParameter(bindParameter){
         this.bindParameter=bindParameter;
     }

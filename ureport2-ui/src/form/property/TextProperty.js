@@ -1,8 +1,8 @@
 /**
  * Created by Jacky.Gao on 2017-10-16.
  */
-import Property from './Property.js';
-export default class TextProperty extends Property{
+import InputProperty from "@/form/property/InputProperty";
+export default class TextProperty extends InputProperty{
     constructor(report){
         super();
         this.init(report);

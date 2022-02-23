@@ -7,7 +7,18 @@ import formBuilder from '../../form/index.js'
 import "../../../public/css/bootstrap.min.css";
 export default {
   mounted: function () {
+    window.vueRoute=this.vueRoute;
     formBuilder()
+  },
+  methods:{
+    vueRoute(path,params){
+      this.$router.push({path:path,query:params})
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      this.$router.go(0);
+    }
   }
 }
 </script>

@@ -45,7 +45,7 @@ export default class MethodSelectDialog{
                     const tr=$(`<tr style="height: 35px;"><td style="vertical-align: middle">${method}</td></tr>`);
                     const selectTD=$(`<td style="vertical-align: middle"></td>`);
                     tr.append(selectTD);
-                    const selector=$(`<a href="###"><i class="glyphicon glyphicon-hand-up" style="font-size: 13pt"></i></a>`);
+                    const selector=$(`<a ><i class="glyphicon glyphicon-hand-up" style="font-size: 13pt"></i></a>`);
                     selector.click(function(){
                         onSelect.call(this,method);
                         _this.dialog.modal('hide');

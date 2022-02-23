@@ -44,7 +44,7 @@ export default class URLParameterDialog{
                 tr.append(valueTD);
                 _this.tbody.append(tr);
                 const td=$(`<td style="vertical-align: middle"></td>`);
-                const edit=$(`<a href="###"><i class="glyphicon glyphicon-edit" style="font-size: 12pt;color: #0000C0"></i></a>`);
+                const edit=$(`<a ><i class="glyphicon glyphicon-edit" style="font-size: 12pt;color: #0000C0"></i></a>`);
                 td.append(edit);
                 edit.click(function(){
                     _this.urlParameterItemDialog.show(function(){
@@ -52,7 +52,7 @@ export default class URLParameterDialog{
                         valueTD.html(param.value);
                     },param,'edit');
                 });
-                const del=$(`<a href="###" style="margin-left: 10px"><i class="glyphicon glyphicon-trash" style="font-size: 12pt;color: #0000C0"></i></a>`);
+                const del=$(`<a  style="margin-left: 10px"><i class="glyphicon glyphicon-trash" style="font-size: 12pt;color: #0000C0"></i></a>`);
                 td.append(del);
                 del.click(function(){
                     confirm(`${window.i18n.dialog.urlParam.delTip}`,function(){
@@ -85,7 +85,7 @@ export default class URLParameterDialog{
             tr.append(valueTD);
             _this.tbody.append(tr);
             const td=$(`<td style="vertical-align: middle"></td>`);
-            const edit=$(`<a href="###"><i class="glyphicon glyphicon-edit" style="font-size: 12pt;color: #0000C0"></i></a>`);
+            const edit=$(`<a ><i class="glyphicon glyphicon-edit" style="font-size: 12pt;color: #0000C0"></i></a>`);
             td.append(edit);
             edit.click(function(){
                 _this.urlParameterItemDialog.show(function(){
@@ -93,7 +93,7 @@ export default class URLParameterDialog{
                     valueTD.html(param.value);
                 },param,'edit');
             });
-            const del=$(`<a href="###" style="margin-left: 10px"><i class="glyphicon glyphicon-trash" style="font-size: 12pt;color: #0000C0"></i></a>`);
+            const del=$(`<a  style="margin-left: 10px"><i class="glyphicon glyphicon-trash" style="font-size: 12pt;color: #0000C0"></i></a>`);
             td.append(del);
             del.click(function(){
                 confirm(`${window.i18n.dialog.urlParam.delTip}`,function(){

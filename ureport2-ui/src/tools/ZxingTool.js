@@ -19,7 +19,7 @@ export default class ZxingTool extends Tool{
         </button>`);
         const ul=$(`<ul class="dropdown-menu" role="menu"></ul>`);
         const qrcode=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-qrcode" style="color: #0e90d2;"></i> ${window.i18n.tools.zxing.qrcode}
                 </a>
             </li>`);
@@ -79,7 +79,7 @@ export default class ZxingTool extends Tool{
             })
         });
         const barcode=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-barcode" style="color: #0e90d2;font-size: 16px"></i> ${window.i18n.tools.zxing.barcode}
                 </a>
             </li>`);

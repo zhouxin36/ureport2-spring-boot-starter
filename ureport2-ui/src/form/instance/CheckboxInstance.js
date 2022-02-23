@@ -73,6 +73,11 @@ export default class CheckboxInstance extends Instance{
         if(json.optionsInline!==undefined){
             this.setOptionsInline(json.optionsInline);
         }
+        this.useDataset=json.useDataset;
+        this.dataset=json.dataset;
+        this.labelField=json.labelField;
+        this.valueField=json.valueField;
+        this.refreshOnChange=json.refreshOnChange;
     }
     toJson(){
         const json={
@@ -81,6 +86,11 @@ export default class CheckboxInstance extends Instance{
             labelPosition:this.labelPosition,
             bindParameter:this.bindParameter,
             type:CheckboxInstance.TYPE,
+            useDataset:this.useDataset,
+            dataset:this.dataset,
+            labelField:this.labelField,
+            valueField:this.valueField,
+            refreshOnChange:this.refreshOnChange,
             options:[]
         };
         for(let option of this.options){
@@ -89,7 +99,14 @@ export default class CheckboxInstance extends Instance{
         return json;
     }
     toXml(){
-        let xml=`<input-checkbox label="${this.label}" type="${CheckboxInstance.TYPE}" options-inline="${this.optionsInline === undefined ? false : this.optionsInline}" label-position="${this.labelPosition || 'top'}" bind-parameter="${this.bindParameter || ''}">`;
+        let xml=`<input-checkbox label="${this.label}" type="${CheckboxInstance.TYPE}" options-inline="${this.optionsInline === undefined ? false : this.optionsInline}" label-position="${this.labelPosition || 'top'}" bind-parameter="${this.bindParameter || ''}"`;
+        if(this.useDataset){
+            xml+=` use-dataset="${this.useDataset}" dataset="${this.dataset}" label-field="${this.labelField}" value-field="${this.valueField}"`;
+        }
+        if(this.refreshOnChange){
+            xml+=` refresh-on-change=${this.refreshOnChange}`
+        }
+        xml+='>';
         for(let option of this.options){
             xml+=`<option label="${option.label}" value="${option.value}"></option>`;
         }

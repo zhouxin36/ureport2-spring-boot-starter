@@ -3,6 +3,7 @@ package vip.zhouxin.ureport.core.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import vip.zhouxin.ureport.core.model.DataSource;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class UreportProperties {
     private String fileStoreDir = "/WEB-INF/ureportfiles";
     private Boolean disableFileProvider = false;
     private Boolean debug = true;
-    private List<DataSource> dataSources;
+    private List<DataSource> dataSources = Collections.emptyList();
 
     public String getFileStoreDir() {
         return fileStoreDir;

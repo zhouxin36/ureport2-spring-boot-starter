@@ -22,27 +22,23 @@ package vip.zhouxin.ureport.core.definition.searchform;
 public class TextInputComponent extends InputComponent {
 	public static final String TYPE = "Text";
 	@Override
-	String inputHtml(RenderContext context) {
-		String name=getBindParameter();
-		Object pvalue=context.getParameter(name)==null ? "" : context.getParameter(name);
-		return "<input type='text' value=\""+pvalue+"\" style=\"padding:3px;height:28px\" id='"+context.buildComponentId(this)+"' name='"+getBindParameter()+"' class='form-control'>";	
+	String inputHtml(RenderContext context, Object pValue) {
+		return "<input type='text' value=\""+pValue+"\" style=\"padding:3px;height:28px\" id='"+context.buildComponentId(this)+"'"+refreshHtml()+" name='"+getBindParameter()+"' class='form-control'>";
 	}
 	@Override
 	public String initJs(RenderContext context) {
 		String name=getBindParameter();
-		StringBuilder sb=new StringBuilder();
-		sb.append("formElements.push(");
-		sb.append("function(){");
-		sb.append("if(''==='"+name+"'){");
-		sb.append("alert('文本框未绑定查询参数名，不能进行查询操作!');");
-		sb.append("throw '文本框未绑定查询参数名，不能进行查询操作!'");
-		sb.append("}");
-		sb.append("return {");
-		sb.append("\""+name+"\":");		
-		sb.append("$('#"+context.buildComponentId(this)+"').val()");
-		sb.append("}");
-		sb.append("}");
-		sb.append(");");
-		return sb.toString();
+		return "formElements.push(" +
+				"function(){" +
+				"if(''==='" + name + "'){" +
+				"alert('文本框未绑定查询参数名，不能进行查询操作!');" +
+				"throw '文本框未绑定查询参数名，不能进行查询操作!'" +
+				"}" +
+				"return {" +
+				"\"" + name + "\":" +
+				"$('#" + context.buildComponentId(this) + "').val()" +
+				"}" +
+				"}" +
+				");";
 	}
 }

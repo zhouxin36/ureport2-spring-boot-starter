@@ -56,8 +56,9 @@ export default class ImportDialog{
                     }
                     const result=text.result;
                     if(result){
-                        let path="designer?template=cache:"+text.message;
-                        window.open("/#/"+path,"_blank");
+                        // let path="designer?template=cache:"+text.message;
+                        vueRoute('/designer',{template: "cache:"+text})
+                        // window.open("/#/"+path,"_blank");
                     }else{
                         const errorInfo=text.errorInfo;
                         if(errorInfo){

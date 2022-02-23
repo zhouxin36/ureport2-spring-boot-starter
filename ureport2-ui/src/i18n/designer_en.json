@@ -509,7 +509,8 @@
     "datasource":{
       "title":"Add Database Connection",
       "addBean":"Add SpringBean Connection",
-      "addBuildin":"Add Buildin Connection"
+      "addBuildin":"Add Buildin Connection",
+      "reflushBtn":"刷新内置数据源配置"
     },
     "prop":{
       "linkConfig":"Link Config",

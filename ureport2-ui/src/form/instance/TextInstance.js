@@ -20,6 +20,7 @@ export default class TextInstance extends Instance{
         if(json.searchOperator){
             this.searchOperator=json.searchOperator;
         }
+        this.refreshOnChange=json.refreshOnChange;
     }
     toJson(){
         const json={
@@ -27,12 +28,13 @@ export default class TextInstance extends Instance{
             optionsInline:this.optionsInline,
             labelPosition:this.labelPosition,
             bindParameter:this.bindParameter,
+            refreshOnChange:this.refreshOnChange,
             type:TextInstance.TYPE
         };
         return json;
     }
     toXml(){
-        const xml=`<input-text label="${this.label}" type="${TextInstance.TYPE}" label-position="${this.labelPosition || 'top'}" bind-parameter="${this.bindParameter || ''}"></input-text>`;
+        const xml=`<input-text  refresh-on-change=${this.refreshOnChange} label="${this.label}" type="${TextInstance.TYPE}" label-position="${this.labelPosition || 'top'}" bind-parameter="${this.bindParameter || ''}"></input-text>`;
         return xml;
     }
 }

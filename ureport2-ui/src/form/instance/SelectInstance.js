@@ -57,6 +57,7 @@ export default class SelectInstance extends Instance{
         this.dataset=json.dataset;
         this.labelField=json.labelField;
         this.valueField=json.valueField;
+        this.refreshOnChange=json.refreshOnChange;
     }
     toJson(){
         const json={
@@ -69,6 +70,7 @@ export default class SelectInstance extends Instance{
             dataset:this.dataset,
             labelField:this.labelField,
             valueField:this.valueField,
+            refreshOnChange:this.refreshOnChange,
             options:[]
         };
         for(let option of this.options){
@@ -80,6 +82,9 @@ export default class SelectInstance extends Instance{
         let xml=`<input-select label="${this.label}" type="${SelectInstance.TYPE}" label-position="${this.labelPosition || 'top'}" bind-parameter="${this.bindParameter || ''}"`;
         if(this.useDataset){
             xml+=` use-dataset="${this.useDataset}" dataset="${this.dataset}" label-field="${this.labelField}" value-field="${this.valueField}"`;
+        }
+        if(this.refreshOnChange){
+            xml+=` refresh-on-change=${this.refreshOnChange}`
         }
         xml+='>';
         for(let option of this.options || []){

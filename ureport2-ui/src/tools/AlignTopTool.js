@@ -44,7 +44,7 @@ export default class AlignTopTool extends Tool{
         });
         const ul=$(`<ul class="dropdown-menu" role="menu"></ul>`);
         const top=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-aligntop" style="color: #0e90d2;"></i> ${window.i18n.tools.alignTop.topAlign}
                 </a>
             </li>`);
@@ -69,7 +69,7 @@ export default class AlignTopTool extends Tool{
         });
         ul.append(top);
         const middle=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-alignmiddle" style="color: #0e90d2;"></i> ${window.i18n.tools.alignTop.middleAlign}
                 </a>
             </li>`);
@@ -94,7 +94,7 @@ export default class AlignTopTool extends Tool{
         });
         ul.append(middle);
         const bottom=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-alignbottom" style="color: #0e90d2;"></i> ${window.i18n.tools.alignTop.bottomAlign}
                 </a>
             </li>`);

@@ -1,20 +1,15 @@
 /**
  * Created by Jacky.Gao on 2017-10-16.
  */
-import Property from './Property.js';
-export default class CheckboxProperty extends Property{
+import bootbox from "bootbox";
+import DatasetProperty from "@/form/property/DatasetProperty";
+export default class CheckboxProperty extends DatasetProperty{
     constructor(){
         super();
         this.init();
     }
     init(){
-        this.col.append(this.buildBindParameter());
-        this.positionLabelGroup=this.buildPositionLabelGroup();
-        this.col.append(this.positionLabelGroup);
-        this.col.append(this.buildLabelGroup());
         this.col.append(this.buildOptionsInlineGroup());
-        this.optionFormGroup=$("<div class='form-group'>");
-        this.col.append(this.optionFormGroup);
     }
     addCheckboxEditor(checkbox){
         var self=this;
@@ -25,7 +20,7 @@ export default class CheckboxProperty extends Property{
             var value=$(this).val();
             var json={value:value,label:value};
             var array=value.split(",");
-            if(array.length==2){
+            if(array.length===2){
                 json.label=array[0];
                 json.value=array[1];
             }
@@ -54,12 +49,11 @@ export default class CheckboxProperty extends Property{
             self.addCheckboxEditor(newOption);
         });
         addon.append(add);
-        this.optionFormGroup.append(inputGroup);
+        this.simpleOptionGroup.append(inputGroup);
     }
     refreshValue(current){
         super.refreshValue(current);
-        this.optionFormGroup.empty();
-        this.optionFormGroup.append($("<label>选项(若显示值与实际值不同，则用“,”分隔，如“是,true”等)</label>"));
+        this.simpleOptionGroup.append($("<label>选项(若显示值与实际值不同，则用“,”分隔，如“是,true”等)</label>"));
         var self=this;
         $.each(this.current.options,function(index,checkbox){
             self.addCheckboxEditor(checkbox);

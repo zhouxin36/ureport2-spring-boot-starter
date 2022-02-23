@@ -23,6 +23,24 @@ import '../public/venderjs/bootstrap-datetimepicker.js'
     };
 }(jQuery));
 
+export function loadSearchForm(){
+    refreshSearchFormData();
+    let body = buildLocationSearchBody();
+    $.ajax({
+        url: window._server + "/preview/loadSearchForm",
+        contentType: 'application/json',
+        type:'POST',
+        data:JSON.stringify(body),
+        success:function(message){
+            let upSearchForm = $(`#upSearchFormDiv`);
+            let downSearchForm = $(`#downSearchFormDiv`);
+            upSearchForm.empty();
+            downSearchForm.empty();
+            upSearchForm.append(message.upSearchFormHtml);
+            upSearchForm.append(message.downSearchFormHtml);
+        }
+    });
+}
 
 export function previewInit() {
     let body = buildLocationSearchBody();
@@ -33,29 +51,32 @@ export function previewInit() {
         data: JSON.stringify(body),
         success: function (message) {
             var body = $("#app");
-            body.append(message.upSearchFormHtml)
-            if (message.error == true) {
+            let upSearchForm = $(`<div id = "upSearchFormDiv"></div>`)
+            upSearchForm.append(message.upSearchFormHtml)
+            body.append(upSearchForm)
+            if (message.error === true) {
                 body.append(`<div id="_ureport_table" style="float:` + message.reportAlign + `">` + message.content + `</div>`)
                 body.append(`<iframe name="_print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>`)
                 body.append(`<iframe name="_print_pdf_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>`)
                 return
             }
-            // file = message.file
-            // customParameters = message.customParameters
-            let param = urlEncode(message.customParameters)
+            let param = {}
+            let pageParam = {}
             window.searchFormParameters = {};
             for (let key in message.customParameters) {
                 window.searchFormParameters[key] = message.customParameters[key];
+                param[key] = message.customParameters[key];
+                pageParam[key] = message.customParameters[key];
             }
             $('title').append(message.title)
             $('style').append(message.style)
-            if (message.tools.show == true) {
+            if (message.tools.show === true) {
                 var div1 = $(`<div style="border:solid 1px #ddd;border-radius:5px;height:35px;width:100%;margin-bottom:5px;background:#f8f8f8"></div>`);
                 var div2 = $(`<div style="text-align:` + message.reportAlign + `"></div>`)
                 div1.append(div2)
                 body.append(div1)
 
-                if (message.tools.print == true) {
+                if (message.tools.print === true) {
                     var button = $(`<button type="button" class="btn btn-default ureport-print"\n` +
                         `                style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="在线打印">\n` +
                         `            <img src="../../icons/print.svg" width="20px" height="20px">\n` +
@@ -108,7 +129,7 @@ export function previewInit() {
                         });
                     })
                 }
-                if (message.tools.pdfPrint == true) {
+                if (message.tools.pdfPrint === true) {
                     var button = $(`<button type="button" class="btn btn-default ureport-pdf-direct-print"\n` +
                         `                style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="PDF在线打印">\n` +
                         `            <img src="../../icons/pdf-direct-print.svg" width="20px" height="20px">\n` +
@@ -133,7 +154,7 @@ export function previewInit() {
                 }
                 let directPrintPdf = false, index = 0;
                 const pdfPrintDialog = new PDFPrintDialog();
-                if (message.tools.pdfPreviewPrint == true) {
+                if (message.tools.pdfPreviewPrint === true) {
                     var button = $(`<button type="button" class="btn btn-default ureport-pdf-print"\n` +
                         `                style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="PDF在线预览打印">\n` +
                         `            <img src="../../icons/pdf-print.svg" width="20px" height="20px">\n` +
@@ -159,7 +180,7 @@ export function previewInit() {
                         });
                     })
                 }
-                if (message.tools.pdf == true) {
+                if (message.tools.pdf === true) {
                     var button = $(`<button type="button" class="btn btn-default ureport-export-pdf"\n` +
                         `                style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="导出PDF">\n` +
                         `            <img src="../../icons/pdf.svg" width="20px" height="20px">\n` +
@@ -168,10 +189,10 @@ export function previewInit() {
                     button.click(function () {
                         const urlParameters = buildLocationSearchParameters();
                         const url = window._server + '/pdf' + urlParameters;
-                        window.open("/#/"+url, '_blank');
+                        window.open(url, '_blank');
                     })
                 }
-                if (message.tools.word == true) {
+                if (message.tools.word === true) {
                     var button = $(`<button type="button" class="btn btn-default ureport-export-word"\n` +
                         `                style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="导出WORD">\n` +
                         `            <img src="../../icons/word.svg" width="20px" height="20px">\n` +
@@ -180,10 +201,10 @@ export function previewInit() {
                     button.click(function () {
                         const urlParameters = buildLocationSearchParameters();
                         const url = window._server + '/word' + urlParameters;
-                        window.open("/#/"+url, '_blank');
+                        window.open(url, '_blank');
                     })
                 }
-                if (message.tools.excel == true) {
+                if (message.tools.excel === true) {
                     var button = $(`<button type="button" class="btn btn-default ureport-export-excel"\n` +
                         `                style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="导出EXCEL">\n` +
                         `            <img src="../../icons/excel.svg" width="20px" height="20px">\n` +
@@ -192,10 +213,10 @@ export function previewInit() {
                     button.click(function () {
                         const urlParameters = buildLocationSearchParameters();
                         const url = window._server + '/excel' + urlParameters;
-                        window.open("/#/"+url, '_blank');
+                        window.open(url, '_blank');
                     })
                 }
-                if (message.tools.pagingExcel == true) {
+                if (message.tools.pagingExcel === true) {
                     var button = $(`<button type="button" class="btn btn-default ureport-export-excel-paging"\n` +
                         `                style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="分页导出EXCEL">\n` +
                         `            <img src="../../icons/excel-paging.svg" width="20px" height="20px">\n` +
@@ -204,10 +225,10 @@ export function previewInit() {
                     button.click(function () {
                         const urlParameters = buildLocationSearchParameters();
                         const url = window._server + '/excel/paging' + urlParameters;
-                        window.open("/#/"+url, '_blank');
+                        window.open(url, '_blank');
                     })
                 }
-                if (message.tools.sheetPagingExcel == true) {
+                if (message.tools.sheetPagingExcel === true) {
                     var button = $(`<button type="button" class="btn btn-default ureport-export-excel-paging-sheet"\n` +
                         `                style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px"\n` +
                         `                title="分页分Sheet导出EXCEL">\n` +
@@ -217,10 +238,10 @@ export function previewInit() {
                     button.click(function () {
                         const urlParameters = buildLocationSearchParameters();
                         const url = window._server + '/excel/sheet' + urlParameters;
-                        window.open("/#/"+url, '_blank');
+                        window.open(url, '_blank');
                     })
                 }
-                if (message.tools.paging == true) {
+                if (message.tools.paging === true) {
                     var preview
                     if (message.pageIndex > 0) {
                         preview = '分页预览'
@@ -233,19 +254,27 @@ export function previewInit() {
                         `                <span class="caret"></span>\n` +
                         `            </button>`)
                     var ul = $(`<ul class="dropdown-menu" role="menu"></ul>`)
-                    let previewUrl;
-                    let pagePreviewUrl;
-                    if (message.hasTools) {
-                        previewUrl = "/#/preview?template="+ message.file + `&tools=` + message.toolsInfo + param;
-                        pagePreviewUrl = "/#/preview?template="+ message.file + `&pageIndex=1&tools=` + message.toolsInfo + param;
-                    } else {
-                        previewUrl = "/#/preview?template="+ message.file + param;
-                        pagePreviewUrl = "/#/preview?template="+ message.file + `&pageIndex=1` + param;
-                    }
-                    ul.append(`<li><a target="_blank" href="` + previewUrl + `" style="color:#337ab7">预览</a>\n` +
-                        `                </li>`)
-                    ul.append(` <li><a target="_blank" href="` + pagePreviewUrl + `" style="color:#337ab7">分页预览</a>\n` +
-                        `                </li>`)
+                    param.template=message.file;
+                    pageParam.template=message.file;
+                    pageParam.pageIndex=1;
+                    let pr = $(`<li><a style="color:#337ab7">预览</a>\n` +
+                        `                </li>`);
+                    let pagePr = $(`<li><a style="color:#337ab7">分页预览</a>\n` +
+                        `                </li>`);
+                    pr.click(function () {
+                        vueRoute('preview',window.buildQueryBody('pageIndex'))
+                    })
+                    pagePr.click(function () {
+                        let body=window.buildQueryBody();
+                        if (!body.pageIndex){
+                            body.pageIndex=1
+                        }
+                        vueRoute('preview',body)
+                    })
+
+                    ul.append(pr)
+                    ul.append(pagePr)
+
                     btn.append(ul)
                     div2.append(btn)
                 }
@@ -261,7 +290,9 @@ export function previewInit() {
                     div2.append(span)
                 }
             }
-            body.append(message.downSearchFormHtml)
+            let downSearchForm = $(`<div id = "downSearchFormDiv"></div>`)
+            downSearchForm.append(message.downSearchFormHtml)
+            body.append(downSearchForm)
             body.append(`<div id="_ureport_table" style="float:` + message.reportAlign + `">` + message.content + `</div>`)
             body.append(`<iframe name="_print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>`)
             body.append(`<iframe name="_print_pdf_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>`)
@@ -277,7 +308,7 @@ export function previewInit() {
             sc.append(message.searchFormJs)
             sc.type = 'text/javascript'
             document.getElementsByTagName('head')[0].appendChild(sc)
-            var sc = document.createElement('script')
+            sc = document.createElement('script')
             sc.src = '../../venderjs/bootstrap.min.js'
             sc.type = 'text/javascript'
             document.getElementsByTagName('head')[0].appendChild(sc)
@@ -320,8 +351,11 @@ window.buildLocationSearchParameters = function (exclude) {
     if (urlParameters.length > 0) {
         urlParameters = urlParameters.substring(1, urlParameters.length);
     }
-    if (urlParameters==='' || urlParameters === undefined || urlParameters === null){
-        urlParameters = window.location.href.replaceAll("#/","").split("?")[1];
+    if (!urlParameters){
+        let splits=window.location.href.replaceAll("#/","").split("?");
+        if (splits.length>=2){
+            urlParameters = splits[1];
+        }
     }
     let parameters = {};
     const pairs = urlParameters.split('&');
@@ -359,14 +393,41 @@ window.buildLocationSearchParameters = function (exclude) {
     }
     return p;
 };
-
+window.buildQueryBody = function (exclude) {
+    refreshSearchFormData();
+    let body = buildLocationSearchBody(exclude);
+    if (body.customParameters!==null && body.customParameters!== undefined){
+        for (let key in body.customParameters) {
+            body[key]=body.customParameters[key]
+        }
+    }
+    body.customParameters = undefined;
+    return body;
+}
+window.refreshSearchFormData = function () {
+    window.searchFormParameters={};
+    for(let fun of window.formElements){
+        const json=fun.call(this);
+        for(let key in json){
+            let value=json[key];
+            if (!value){
+                continue
+            }
+            value=encodeURI(value);
+            window.searchFormParameters[key]=value;
+        }
+    }
+}
 window.buildLocationSearchBody = function (exclude) {
     let urlParameters = window.location.search;
     if (urlParameters.length > 0) {
         urlParameters = urlParameters.substring(1, urlParameters.length);
     }
-    if (urlParameters==='' || urlParameters === undefined || urlParameters === null){
-        urlParameters = window.location.href.replaceAll("#/","").split("?")[1];
+    if (!urlParameters){
+        let splits=window.location.href.replaceAll("#/","").split("?");
+        if (splits.length>=2){
+            urlParameters = splits[1];
+        }
     }
     let parameters = {};
     const pairs = urlParameters.split('&');
@@ -452,31 +513,37 @@ window.buildPaging = function (pageIndex, totalPage) {
 
     const pageSelector = $('#pageSelector');
     pageSelector.change(function () {
-        const parameters = window.buildLocationSearchParameters('pageIndex');
-        let url = `/preview${parameters}&pageIndex=${$(this).val()}`;
-        window.open("/#/"+url, '_blank');
+        const parameters = window.buildLocationSearchBody('pageIndex');
+        // let url = `/preview${parameters}&pageIndex=${$(this).val()}`;
+        // window.open("/#/"+url, '_blank');
+        parameters.pageIndex=$(this).val();
+        vueRoute('/preview',parameters);
     });
     pageSelector.val(pageIndex);
     if (totalPage === 1) {
         return;
     }
-    const parameters = window.buildLocationSearchParameters('pageIndex');
+    const parameters = window.buildQueryBody('pageIndex');
     const pagingContainer = $('#pageLinkContainer');
     pagingContainer.empty();
     if (pageIndex > 1) {
-        let url = `/preview${parameters}&pageIndex=${pageIndex - 1}`;
+        // let url = `/preview${parameters}&pageIndex=${pageIndex - 1}`;
+        parameters.pageIndex=pageIndex - 1;
         const prevPage = $(`<button type="button" class="btn btn-link btn-sm">上一页</button>`);
         pagingContainer.append(prevPage);
         prevPage.click(function () {
-            window.open("/#/"+url, '_blank');
+            // window.open("/#/"+url, '_blank');
+            vueRoute('/preview',parameters);
         });
     }
     if (pageIndex < totalPage) {
-        let url = `/preview${parameters}&pageIndex=${pageIndex + 1}`;
+        // let url = `/preview${parameters}&pageIndex=${pageIndex + 1}`;
+        parameters.pageIndex=pageIndex + 1;
         const nextPage = $(`<button type="button" class="btn btn-link btn-sm">下一页</button>`);
         pagingContainer.append(nextPage);
         nextPage.click(function () {
-            window.open("/#/"+url, '_blank');
+            // window.open("/#/"+url, '_blank');
+            vueRoute('/preview',parameters);
         });
     }
 };
@@ -493,27 +560,9 @@ window._intervalRefresh = function (value, totalPage) {
 };
 
 function _refreshData(second) {
-    window.searchFormParameters={};
-    for(let fun of window.formElements){
-        const json=fun.call(this);
-        for(let key in json){
-            let value=json[key];
-            value=encodeURI(value);
-            window.searchFormParameters[key]=value;
-        }
-    }
-    const body = buildLocationSearchBody('pageIndex');
+    refreshSearchFormData();
+    const body = buildLocationSearchBody();
     let url = window._server + `/preview/loadData`;
-    const totalPage = window._totalPage;
-    if (totalPage > 0) {
-        if (window._currentPageIndex) {
-            if (window._currentPageIndex > totalPage) {
-                window._currentPageIndex = 1;
-            }
-            url += "&pageIndex=" + window._currentPageIndex + "";
-        }
-        $("#pageSelector").val(window._currentPageIndex);
-    }
     $.ajax({
         url,
         type: 'POST',
@@ -602,21 +651,10 @@ window._buildChart = function (canvasId, chartJson) {
 };
 
 export function submitSearchForm () {
-    window.searchFormParameters={};
-    for(let fun of window.formElements){
-        const json=fun.call(this);
-        for(let key in json){
-            let value=json[key];
-            value=encodeURI(value);
-            window.searchFormParameters[key]=value;
-        }
-    }
-    const body = window.buildLocationSearchBody('pageIndex');
+    refreshSearchFormData();
+    const body = window.buildLocationSearchBody();
     let url = window._server + "/preview/loadData";
     const pageSelector = $(`#pageSelector`);
-    if (pageSelector.length > 0) {
-        url += '&pageIndex=1';
-    }
     $.ajax({
         url,
         type: 'POST',

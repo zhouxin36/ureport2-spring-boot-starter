@@ -18,7 +18,7 @@ export default class BorderTool extends Tool{
         </button>`);
         const ul=$(`<ul class="dropdown-menu" role="menu"></ul>`);
         const fullBorder=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-full-border" style="color: #0e90d2;"></i> ${window.i18n.tools.border.allLine}
                 </a>
             </li>`);
@@ -61,7 +61,7 @@ export default class BorderTool extends Tool{
         });
         ul.append(fullBorder);
         const noBorder=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-no-border" style="color: #0e90d2;"></i> ${window.i18n.tools.border.noBorder}
                 </a>
             </li>`);
@@ -100,7 +100,7 @@ export default class BorderTool extends Tool{
         });
         ul.append(noBorder);
         const leftBorder=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-left-border" style="color: #0e90d2;"></i> ${window.i18n.tools.border.leftBorder}
                 </a>
             </li>`);
@@ -143,7 +143,7 @@ export default class BorderTool extends Tool{
         });
         ul.append(leftBorder);
         const rightBorder=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-right-border" style="color: #0e90d2;"></i> ${window.i18n.tools.border.rightBorder}
                 </a>
             </li>`);
@@ -186,7 +186,7 @@ export default class BorderTool extends Tool{
         });
         ul.append(rightBorder);
         const topBorder=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-top-border" style="color: #0e90d2;"></i> ${window.i18n.tools.border.topBorder}
                 </a>
             </li>`);
@@ -229,7 +229,7 @@ export default class BorderTool extends Tool{
         });
         ul.append(topBorder);
         const bottomBorder=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-bottom-border" style="color: #0e90d2;"></i> ${window.i18n.tools.border.bottomBorder}
                 </a>
             </li>`);
@@ -273,7 +273,7 @@ export default class BorderTool extends Tool{
         ul.append(bottomBorder);
         ul.append(`<li class="divider"></li>`);
         const customBorder=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-full-border" style="color: #0e90d2;"></i> ${window.i18n.tools.border.customBorder}
                 </a>
             </li>`);

@@ -36,7 +36,7 @@ export default class SearchFormDialog{
     show(reportDef){
         window.__current_report_def=reportDef;
         this.dialog.modal('show');
-        const url="searchform?_i"+(this.index++);
+        const url="/#/searchform?_i"+(this.index++);
         this.iframe.prop('src',url);
     }
 }

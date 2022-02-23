@@ -43,18 +43,18 @@ public class Context {
 	private int pageIndex;
 	private int totalPages;
 	private boolean doPaging;
-	private Map<String,Object> variableMap=new HashMap<String,Object>();
-	private Map<Integer,List<Row>> currentPageRowsMap=new HashMap<Integer,List<Row>>();
+	private final Map<String,Object> variableMap= new HashMap<>();
+	private final Map<Integer,List<Row>> currentPageRowsMap= new HashMap<>();
 	private Map<String, Dataset> datasetMap;
-	private ApplicationContext applicationContext;
+	private final ApplicationContext applicationContext;
 	private ReportBuilder reportBuilder;
-	private Map<String,Object> parameters;
+	private final Map<String,Object> parameters;
 	private HideRowColumnBuilder hideRowColumnBuilder;
-	private List<Cell> existPageFunctionCells=new ArrayList<Cell>();
-	private Map<String,List<Cell>> unprocessedCellsMap = new HashMap<String,List<Cell>>();
-	private Map<Row,Map<Column, Cell>> blankCellsMap=new HashMap<Row,Map<Column, Cell>>();
-	private Map<Row,Integer> fillBlankRowsMap=new HashMap<Row,Integer>();
-	private Map<String, ChartData> chartDataMap=new HashMap<String, ChartData>();
+	private final List<Cell> existPageFunctionCells= new ArrayList<>();
+	private final Map<String,List<Cell>> unprocessedCellsMap = new HashMap<>();
+	private final Map<Row,Map<Column, Cell>> blankCellsMap= new HashMap<>();
+	private final Map<Row,Integer> fillBlankRowsMap= new HashMap<>();
+	private final Map<String, ChartData> chartDataMap= new HashMap<>();
 	public Context(ReportBuilder reportBuilder, Report report, Map<String,Dataset> datasetMap, ApplicationContext applicationContext, Map<String,Object> parameters, HideRowColumnBuilder hideRowColumnBuilder) {
 		this.reportBuilder=reportBuilder;
 		this.report = report;
@@ -68,8 +68,7 @@ public class Context {
 			if(key.equals(report.getRootCell().getName())){
 				continue;
 			}
-			List<Cell> list=new ArrayList<Cell>();
-			list.addAll(cellsMap.get(key));
+			List<Cell> list = new ArrayList<>(cellsMap.get(key));
 			unprocessedCellsMap.put(key, list);
 		}
 		this.rootCell=new Cell();
@@ -83,8 +82,7 @@ public class Context {
 	
 	public Map<String,String> getMapping(DatasetExpression expr){
 		if(expr.getMappingType().equals(MappingType.simple)){
-			Map<String,String> mapping=expr.getMapping();
-			return mapping;
+			return expr.getMapping();
 		}else if(expr.getMappingType().equals(MappingType.dataset)){
 			if(StringUtils.isNotBlank(expr.getMappingDataset()) && StringUtils.isNotBlank(expr.getMappingKeyProperty()) && StringUtils.isNotBlank(expr.getMappingValueProperty())){
 				Map<String,String> mapping=new HashMap<String,String>();

@@ -18,7 +18,6 @@ package vip.zhouxin.ureport.core.model;
 import vip.zhouxin.ureport.core.build.Context;
 import vip.zhouxin.ureport.core.build.paging.Page;
 import vip.zhouxin.ureport.core.build.paging.PagingBuilder;
-import vip.zhouxin.ureport.core.definition.Band;
 import vip.zhouxin.ureport.core.definition.ConditionPropertyItem;
 import vip.zhouxin.ureport.core.definition.HeaderFooterDefinition;
 import vip.zhouxin.ureport.core.definition.Paper;
@@ -39,24 +38,20 @@ public class Report {
 	private Cell rootCell;
 	private Context context;
 	private List<Row> rows;
-	private List<Row> headerRepeatRows=new ArrayList<Row>();
-	private List<Row> footerRepeatRows=new ArrayList<Row>();
-	private List<Row> titleRows=new ArrayList<Row>();
-	private List<Row> summaryRows=new ArrayList<Row>();
+	private List<Row> headerRepeatRows= new ArrayList<>();
+	private List<Row> footerRepeatRows=new ArrayList<>();
+	private final List<Row> titleRows=new ArrayList<>();
+	private final List<Row> summaryRows=new ArrayList<>();
 	private int repeatHeaderRowHeight=0,repeatFooterRowHeight=0,titleRowsHeight=0,summaryRowsHeight=0;
 	private List<Column> columns;
 	private List<Page> pages;
 	private String reportFullName;
-	private List<Cell> lazyComputeCells=new ArrayList<Cell>();
-	private Map<Row,Map<Column, Cell>> rowColCellMap=new HashMap<Row,Map<Column, Cell>>();
-	private Map<String,List<Cell>> cellsMap=new HashMap<String,List<Cell>>();
+	private final List<Cell> lazyComputeCells= new ArrayList<>();
+	private final Map<Row,Map<Column, Cell>> rowColCellMap= new HashMap<>();
+	private final Map<String,List<Cell>> cellsMap= new HashMap<>();
 	public void insertRow(Row row, int rowNumber){
 		int pos=rowNumber-1;
 		rows.add(pos,row);
-		Band band=row.getBand();
-		if(band==null){
-			return;
-		}
 	}
 	public void insertRows(int firstRowIndex,List<Row> insertRows){
 		int pos=firstRowIndex-1;

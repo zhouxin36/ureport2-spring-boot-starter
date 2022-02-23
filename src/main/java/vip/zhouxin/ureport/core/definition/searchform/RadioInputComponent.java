@@ -22,26 +22,23 @@ import java.util.List;
  * @author Jacky.gao
  * @since 2017年10月23日
  */
-public class RadioInputComponent extends InputComponent {
+public class RadioInputComponent extends DatasetComponent {
 	public static final String TYPE = "Radio";
 	private boolean optionsInline;
-	private List<Option> options;
 	@Override
-	String inputHtml(RenderContext context) {
+	String inputHtml(RenderContext context,Object pValue) {
 		StringBuilder sb=new StringBuilder();
-		String name=getBindParameter();
-		Object pvalue=context.getParameter(name)==null ? "" : context.getParameter(name);
-		String[] data=pvalue.toString().split(",");
+		String[] data=pValue.toString().split(",");
 		List<String> list=Arrays.asList(data);
 		sb.append("<div>");
-		for(Option option:options){
+		for(Option option:generateOption(context)){
 			String value=option.getValue();
 			String label=option.getLabel();
 			String checked=list.contains(value) ? "checked" : "";
 			if(this.optionsInline){
-				sb.append("<span class='checkbox-inline' style='padding-top:0px;padding-left:2px;padding-top:0px'><input value='"+value+"' "+checked+" type='radio' name='"+name+"'> "+label+"</span>");
+				sb.append("<span class='checkbox-inline' style='padding-top:0px;padding-left:2px;padding-top:0px'><input value='").append(value).append("' ").append(refreshHtml()).append(checked).append(" type='radio' name='").append(getBindParameter()).append("'> ").append(label).append("</span>");
 			}else{
-				sb.append("<span class='checkbox'><input value='"+value+"' type='radio' "+checked+" name='"+name+"' style='margin-left: auto'> <span style=\"margin-left:15px\">"+label+"</span></span>");
+				sb.append("<span class='checkbox'><input value='").append(value).append("' type='radio' ").append(refreshHtml()).append(checked).append(" name='").append(getBindParameter()).append("' style='margin-left: auto'> <span style=\"margin-left:15px\">").append(label).append("</span></span>");
 			}
 		}
 		sb.append("</div>");
@@ -50,31 +47,23 @@ public class RadioInputComponent extends InputComponent {
 	@Override
 	public String initJs(RenderContext context) {
 		String name=getBindParameter();
-		StringBuilder sb=new StringBuilder();
-		sb.append("formElements.push(");
-		sb.append("function(){");
-		sb.append("if(''==='"+name+"'){");
-		sb.append("alert('单选框未绑定查询参数名，不能进行查询操作!');");
-		sb.append("throw '单选框未绑定查询参数名，不能进行查询操作!'");
-		sb.append("}");
-		sb.append("return {");
-		sb.append("\""+name+"\":");
-		sb.append("$(\"input[name='"+getBindParameter()+"']:checked\").val()");
-		sb.append("}");
-		sb.append("}");
-		sb.append(");");
-		return sb.toString();
+		return "formElements.push(" +
+				"function(){" +
+				"if(''==='" + name + "'){" +
+				"alert('单选框未绑定查询参数名，不能进行查询操作!');" +
+				"throw '单选框未绑定查询参数名，不能进行查询操作!'" +
+				"}" +
+				"return {" +
+				"\"" + name + "\":" +
+				"$(\"input[name='" + getBindParameter() + "']:checked\").val()" +
+				"}" +
+				"}" +
+				");";
 	}
 	public void setOptionsInline(boolean optionsInline) {
 		this.optionsInline = optionsInline;
 	}
 	public boolean isOptionsInline() {
 		return optionsInline;
-	}
-	public void setOptions(List<Option> options) {
-		this.options = options;
-	}
-	public List<Option> getOptions() {
-		return options;
 	}
 }

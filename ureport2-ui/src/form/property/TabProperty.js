@@ -3,6 +3,7 @@
  */
 import Utils from '../Utils.js';
 import Property from './Property.js';
+import bootbox from "bootbox";
 
 export default class TabProperty extends Property{
     constructor(){

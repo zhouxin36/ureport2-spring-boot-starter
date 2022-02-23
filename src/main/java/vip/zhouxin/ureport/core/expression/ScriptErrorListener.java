@@ -27,7 +27,7 @@ import java.util.List;
  * @since 2016年7月26日
  */
 public class ScriptErrorListener extends BaseErrorListener {
-	private List<ErrorInfo> infos=new ArrayList<ErrorInfo>();
+	private final List<ErrorInfo> infos= new ArrayList<>();
 	@Override
 	public void syntaxError(Recognizer<?, ?> recognizer,Object offendingSymbol, int line, int charPositionInLine,String msg, RecognitionException e) {
 		infos.add(new ErrorInfo(line,charPositionInLine,msg));

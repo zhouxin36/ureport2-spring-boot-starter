@@ -7,6 +7,7 @@ import BuildinTree from '../tree/BuildinTree.js';
 import DatasourceDialog from '../dialog/DatasourceDialog.js';
 import SpringDialog from '../dialog/SpringDialog.js';
 import BuildinDatasourceSelectDialog from '../dialog/BuildinDatasourceSelectDialog.js';
+import {alert, confirm} from "@/MsgBox";
 
 export default class DatasourcePanel{
     constructor(context){
@@ -63,6 +64,22 @@ export default class DatasourcePanel{
                 const tree=new BuildinTree(_this.treeContainer,_this.datasources,ds,_this.context);
                 _this.datasources.push(tree);
             });
+        });
+        const reflushBtn=$(`<button class="btn btn-default" style="border:none;border-radius:0;background: #f8f8f8;padding: 6px 8px;" title="${window.i18n.property.datasource.reflushBtn}">
+            <i class="ureport ureport-reflushBtn"></i>
+        </button>`);
+        toolbar.append(reflushBtn);
+        reflushBtn.click(function(){
+            confirm("是否刷新内置数据源",function () {
+                $.ajax({
+                    url: window._server+'/datasource/resetBuildInDataSources',
+                    contentType: 'application/json',
+                    type:'GET',
+                    success:function(){
+                        alert(`刷新成功`);
+                    }
+                });
+            })
         });
         this.buildDatasources();
         return panel;

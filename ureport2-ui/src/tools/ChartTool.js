@@ -19,7 +19,7 @@ export default class ChartTool extends Tool{
         </button>`);
         const ul=$(`<ul class="dropdown-menu" role="menu"></ul>`);
         const pie=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-pie" style="color: #0e90d2;"></i> ${window.i18n.tools.chart.pie}
                 </a>
             </li>`);
@@ -28,7 +28,7 @@ export default class ChartTool extends Tool{
             _this._doClick('pie');
         });
         const doughnut=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-doughnut" style="color: #0e90d2;"></i> ${window.i18n.tools.chart.doughnut}
                 </a>
             </li>`);
@@ -37,7 +37,7 @@ export default class ChartTool extends Tool{
             _this._doClick('doughnut');
         });
         const line=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-line" style="color: #0e90d2;"></i> ${window.i18n.tools.chart.line}
                 </a>
             </li>`);
@@ -46,7 +46,7 @@ export default class ChartTool extends Tool{
             _this._doClick('line');
         });
         const bar=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-bar" style="color: #0e90d2;"></i> ${window.i18n.tools.chart.bar}
                 </a>
             </li>`);
@@ -55,7 +55,7 @@ export default class ChartTool extends Tool{
             _this._doClick('bar');
         });
         const horBar=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-horizontal-bar" style="color: #0e90d2;"></i> ${window.i18n.tools.chart.horizontalBar}
                 </a>
             </li>`);
@@ -64,7 +64,7 @@ export default class ChartTool extends Tool{
             _this._doClick('horizontalBar');
         });
         const area=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-area" style="color: #0e90d2;"></i> ${window.i18n.tools.chart.area}
                 </a>
             </li>`);
@@ -73,7 +73,7 @@ export default class ChartTool extends Tool{
             _this._doClick('area');
         });
         const radar=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-radar" style="color: #0e90d2;"></i> ${window.i18n.tools.chart.radar}
                 </a>
             </li>`);
@@ -82,7 +82,7 @@ export default class ChartTool extends Tool{
             _this._doClick('radar');
         });
         const polar=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-polar" style="color: #0e90d2;"></i> ${window.i18n.tools.chart.polar}
                 </a>
             </li>`);
@@ -91,7 +91,7 @@ export default class ChartTool extends Tool{
             _this._doClick('polar');
         });
         const scatter=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-scatter" style="color: #0e90d2;"></i> ${window.i18n.tools.chart.scatter}
                 </a>
             </li>`);
@@ -100,7 +100,7 @@ export default class ChartTool extends Tool{
             _this._doClick('scatter');
         });
         const bubble=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-bubble" style="color: #0e90d2;"></i> ${window.i18n.tools.chart.bubble}
                 </a>
             </li>`);

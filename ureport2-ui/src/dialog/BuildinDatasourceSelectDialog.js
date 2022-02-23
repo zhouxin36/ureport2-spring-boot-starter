@@ -47,7 +47,7 @@ export default class BuildinDatasourceSelectDialog{
                     const tr=$(`<tr style="height: 35px;"><td style="vertical-align: middle">${name}</td></tr>`);
                     const selectTD=$(`<td style="vertical-align: middle"></td>`);
                     tr.append(selectTD);
-                    const selector=$(`<a href="###"><i class="glyphicon glyphicon-hand-up" style="font-size: 13pt"></i></a>`);
+                    const selector=$(`<a ><i class="glyphicon glyphicon-hand-up" style="font-size: 13pt"></i></a>`);
                     selector.click(function(){
                         for(let ds of _this.datasources){
                             if(ds.name===name){

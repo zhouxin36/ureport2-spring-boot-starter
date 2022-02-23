@@ -1,3 +1,7 @@
+/*
+https://fontello.com/  字体网站
+http://font.qqe2.com/index.html 编辑网站
+ */
 
 @font-face {font-family: "ureport";
   src: url('iconfont.eot'); /* IE9*/
@@ -17,6 +21,7 @@
 .ureport-plus:before { content: "\e608"; }
 
 .ureport-shareconnection:before { content: "\e660"; }
+.ureport-reflushBtn:before { content: "\e800"; }
 
 .ureport-bar:before { content: "\e66b"; }
 

@@ -24,12 +24,15 @@ public abstract class InputComponent implements Component {
 	private String label;
 	private String bindParameter;
 	private String type;
+	private Boolean refreshOnChange = false;
 	protected LabelPosition labelPosition= LabelPosition.top;
 	
-	abstract String inputHtml(RenderContext context);
+	abstract String inputHtml(RenderContext context,Object pValue);
 	@Override
 	public String toHtml(RenderContext context) {
-		StringBuffer sb=new StringBuffer();
+		StringBuilder sb=new StringBuilder();
+		String name = getBindParameter();
+		Object pValue = context.getParameter(name) == null ? "" : context.getParameter(name);
 		if(this.labelPosition.equals(LabelPosition.top)){
 			sb.append("<div>");			
 		}else{
@@ -37,12 +40,12 @@ public abstract class InputComponent implements Component {
 		}
 		sb.append("<div class='form-group' style='margin:0px 0px 10px 0px'>");
 		if(this.labelPosition.equals(LabelPosition.top)){
-			sb.append("<span style='font-size:13px'>"+this.label+"</span>");			
-			sb.append(inputHtml(context));
+			sb.append("<span style='font-size:13px'>").append(this.label).append("</span>");
+			sb.append(inputHtml(context,pValue));
 		}else{					
-			sb.append("<span class='col-md-3' style='text-align:right;padding-right:1px;font-size:13px'>"+this.label+"</span>");			
+			sb.append("<span class='col-md-3' style='text-align:right;padding-right:1px;font-size:13px'>").append(this.label).append("</span>");
 			sb.append("<div class='col-md-9' style='padding-left:1px;'>");
-			sb.append(inputHtml(context));
+			sb.append(inputHtml(context,pValue));
 			sb.append("</div>");
 		}
 		sb.append("</div>");
@@ -73,5 +76,17 @@ public abstract class InputComponent implements Component {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public Boolean getRefreshOnChange() {
+		return refreshOnChange;
+	}
+
+	public void setRefreshOnChange(Boolean refreshOnChange) {
+		this.refreshOnChange = refreshOnChange;
+	}
+
+	public String refreshHtml(){
+		return getRefreshOnChange() ? " onchange=\"loadSearchForm()\" " : "";
 	}
 }

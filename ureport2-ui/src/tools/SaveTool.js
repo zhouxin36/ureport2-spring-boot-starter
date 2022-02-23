@@ -18,7 +18,7 @@ export default class SaveTool extends Tool{
         </button>`);
         const ul=$(`<ul class="dropdown-menu" role="menu"></ul>`);
         const save=$(`<li id="__save_btn" class="disabled">
-                <a href="###">
+                <a>
                     <i class="ureport ureport-save" style="color: #0e90d2;"></i> ${window.i18n.tools.save.save}
                 </a>
             </li>`);
@@ -49,7 +49,7 @@ export default class SaveTool extends Tool{
             }
         });
         const saveAs=$(`<li>
-                <a href="###">
+                <a>
                     <i class="glyphicon glyphicon-floppy-disk" style="color: #0e90d2;font-size: 16px"></i> ${window.i18n.tools.save.saveAs}
                 </a>
             </li>`);

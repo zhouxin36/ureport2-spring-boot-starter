@@ -15,6 +15,8 @@
  ******************************************************************************/
 package vip.zhouxin.ureport.core.build;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -44,11 +46,14 @@ import java.util.*;
  * @since 2016年11月1日
  */
 public class ReportBuilder extends BasePagination implements ApplicationContextAware{
+
+	private static final Logger logger = LoggerFactory.getLogger(ReportBuilder.class);
+
 	public static final String BEAN_ID="ureport.reportBuilder";
 	private ApplicationContext applicationContext;
-	private Map<String, DatasourceProvider> datasourceProviderMap=new HashMap<String, DatasourceProvider>();
-	private Map<Expand, CellBuilder> cellBuildersMap=new HashMap<Expand, CellBuilder>();
-	private NoneExpandBuilder noneExpandBuilder=new NoneExpandBuilder();
+	private final Map<String, DatasourceProvider> datasourceProviderMap= new HashMap<>();
+	private final Map<Expand, CellBuilder> cellBuildersMap= new HashMap<>();
+	private final NoneExpandBuilder noneExpandBuilder=new NoneExpandBuilder();
 	private HideRowColumnBuilder hideRowColumnBuilder;
 	public ReportBuilder() {
 		cellBuildersMap.put(Expand.Right,new RightExpandBuilder());
@@ -117,11 +122,10 @@ public class ReportBuilder extends BasePagination implements ApplicationContextA
 		for(DatasourceDefinition dsDef:datasources){
 			if(dsDef instanceof JdbcDatasourceDefinition){
 				String dsName=dsDef.getName();
-				Connection conn=null;
-				try{
-					if(datasourceProviderMap.containsKey(dsName)){
-						conn=datasourceProviderMap.get(dsName).getConnection();
-					}
+				if(!datasourceProviderMap.containsKey(dsName)){
+					continue;
+				}
+				try(Connection conn=datasourceProviderMap.get(dsName).getConnection()){
 					JdbcDatasourceDefinition ds=(JdbcDatasourceDefinition)dsDef;
 					List<Dataset> ls=ds.buildDatasets(conn, parameters);
 					if(ls!=null){
@@ -129,12 +133,9 @@ public class ReportBuilder extends BasePagination implements ApplicationContextA
 							datasetMap.put(dataset.getName(), dataset);
 						}					
 					}
-				}finally{
-					if(conn!=null){
-						try {
-							conn.close();
-						} catch (SQLException e) {}
-					}
+				}catch (Exception ex){
+					logger.error("",ex);
+					// do nothing
 				}
 			}else if(dsDef instanceof SpringBeanDatasourceDefinition){
 				SpringBeanDatasourceDefinition ds=(SpringBeanDatasourceDefinition)dsDef;

@@ -3,6 +3,7 @@
  */
 import Utils from './Utils.js';
 import Instance from './instance/Instance.js';
+import bootbox from "bootbox";
 
 export default class Toolbar{
     constructor(){

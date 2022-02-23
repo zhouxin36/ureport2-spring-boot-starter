@@ -4,14 +4,12 @@ import vip.zhouxin.ureport.console.html.Tools;
 
 import java.util.Map;
 
-public class PreviewRes {
+public class PreviewRes extends SearchFormRes{
 
     private String title;
     private String content;
     private Boolean error;
     private String searchFormJs;
-    private String downSearchFormHtml;
-    private String upSearchFormHtml;
     private String style;
     private String reportAlign;
     private Integer totalPage;
@@ -40,22 +38,6 @@ public class PreviewRes {
 
     public void setSearchFormJs(String searchFormJs) {
         this.searchFormJs = searchFormJs;
-    }
-
-    public String getDownSearchFormHtml() {
-        return downSearchFormHtml;
-    }
-
-    public void setDownSearchFormHtml(String downSearchFormHtml) {
-        this.downSearchFormHtml = downSearchFormHtml;
-    }
-
-    public String getUpSearchFormHtml() {
-        return upSearchFormHtml;
-    }
-
-    public void setUpSearchFormHtml(String upSearchFormHtml) {
-        this.upSearchFormHtml = upSearchFormHtml;
     }
 
     public String getStyle() {
@@ -185,7 +167,7 @@ public class PreviewRes {
                 ", content='" + content + '\'' +
                 ", contextPath='" + contextPath + '\'' +
                 ", customParameters='" + customParameters + '\'' +
-                ", downSearchFormHtml='" + downSearchFormHtml + '\'' +
+                ", downSearchFormHtml='" + getDownSearchFormHtml() + '\'' +
                 ", error=" + error +
                 ", file='" + file + '\'' +
                 ", hasTools=" + hasTools +
@@ -199,7 +181,7 @@ public class PreviewRes {
                 ", tools=" + tools +
                 ", totalPage=" + totalPage +
                 ", totalPageWithCol=" + totalPageWithCol +
-                ", upSearchFormHtml='" + upSearchFormHtml + '\'' +
+                ", upSearchFormHtml='" + getUpSearchFormHtml() + '\'' +
                 '}';
     }
 }

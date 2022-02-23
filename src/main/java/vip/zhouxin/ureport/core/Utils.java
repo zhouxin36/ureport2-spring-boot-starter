@@ -72,10 +72,10 @@ public class Utils implements ApplicationContextAware{
 	}
 	
 	public static Collection<BuildinDatasource> getBuildinDatasources() {
-		if (buildinDatasources == null){
-			buildinDatasources= new ArrayList<>();
+		if (Utils.buildinDatasources == null){
+			Utils.buildinDatasources= new ArrayList<>();
 			Collection<GenerateBuildinDatasource> datasources = Optional.of(applicationContext.getBeansOfType(GenerateBuildinDatasource.class)).map(Map::values).orElse(Collections.emptyList());
-			datasources.forEach(e-> buildinDatasources.addAll(e.generate()));
+			datasources.forEach(e-> Utils.buildinDatasources.addAll(e.generate()));
 			UreportProperties properties = applicationContext.getBean(UreportProperties.class);
 			Optional.of(properties).map(UreportProperties::getDataSources).orElse(Collections.emptyList()).forEach(e->{
 				DruidDataSource druidDataSource;
@@ -84,7 +84,7 @@ public class Utils implements ApplicationContextAware{
 				druidDataSource.setUsername(e.getUsername());
 				druidDataSource.setPassword(e.getPassword());
 				druidDataSource.setDriverClassName(e.getDriverName());
-				buildinDatasources.add(new BuildinDatasource() {
+				Utils.buildinDatasources.add(new BuildinDatasource() {
 					@Override
 					public String name() {
 						return e.getTitle();
@@ -102,11 +102,11 @@ public class Utils implements ApplicationContextAware{
 				});
 			});
 		}
-		return buildinDatasources;
+		return Utils.buildinDatasources;
 	}
 
 	public static Collection<BuildinDatasource> resetBuildinDatasources(){
-		buildinDatasources = null;
+		Utils.buildinDatasources = null;
 		return getBuildinDatasources();
 	}
 	
@@ -116,7 +116,7 @@ public class Utils implements ApplicationContextAware{
 
 	
 	public static Connection getBuildinConnection(String name){
-		for(BuildinDatasource datasource:buildinDatasources){
+		for(BuildinDatasource datasource:getBuildinDatasources()){
 			if(name.equals(datasource.name())){
 				return datasource.getConnection();
 			}

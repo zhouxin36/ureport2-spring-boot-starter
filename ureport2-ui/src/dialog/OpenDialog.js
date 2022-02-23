@@ -61,19 +61,20 @@ export default class OpenDialog{
 
                 let openCol=$(`<td style="vertical-align: middle;"></td>`);
                 tr.append(openCol);
-                let openIcon=$(`<a href="###"><i class="glyphicon glyphicon-folder-open" style="color: #008ed3;font-size: 14pt"></i></a>`);
+                let openIcon=$(`<a><i class="glyphicon glyphicon-folder-open" style="color: #008ed3;font-size: 14pt"></i></a>`);
                 openCol.append(openIcon);
                 openIcon.click(function(){
                     confirm(`${window.i18n.dialog.open.openConfirm}[${file.name}]？`,function(){
                         let fullFile=value+encodeURI(file.name);
-                        let path="designer?template="+fullFile;
-                        window.open("/#/"+path,"_blank");
+                        // let path="designer?template="+fullFile;
+                        vueRoute('/designer',{template: fullFile})
+                        // window.open("/#/"+path,"_self");
                     });
                 });
 
                 let deleteCol=$(`<td style="vertical-align: middle;"></td>`);
                 tr.append(deleteCol);
-                let deleteIcon=$(`<a href="###"><i class="glyphicon glyphicon-trash" style="color: red;font-size: 14pt"></i></a>`);
+                let deleteIcon=$(`<a><i class="glyphicon glyphicon-trash" style="color: red;font-size: 14pt"></i></a>`);
                 deleteCol.append(deleteIcon);
 
                 deleteIcon.click(function(){

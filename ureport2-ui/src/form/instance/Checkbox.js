@@ -3,6 +3,7 @@
  */
 import Utils from '../Utils.js';
 import CheckboxInstance from './CheckboxInstance.js';
+
 export default class Checkbox{
     constructor(optionsInline){
         var seq=Utils.seq(Checkbox.ID);
@@ -28,11 +29,10 @@ export default class Checkbox{
         this.setValue(json);
     }
     toJson(){
-        var json={
-            value:this.value,
-            label:this.label
+        return {
+            value: this.value,
+            label: this.label
         };
-        return json;
     }
 }
 Checkbox.ID="Checkbox";

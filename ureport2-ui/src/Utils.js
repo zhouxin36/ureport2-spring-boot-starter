@@ -739,12 +739,17 @@ export function encode(text){
 export function getParameter(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
-    if (r==='' || r === undefined || r === null){
-        r = window.location.href.replaceAll("#/","").split("?")[1].match(reg);
+    if (!r){
+        let splits=window.location.href.replaceAll("#/","").split("?");
+        if (splits.length>=2){
+            r = splits[1].match(reg);
+        }
     }
     if (r != null)return r[2];
     return null;
 };
+
+
 
 export function mmToPoint(mm){
     let value=mm*2.834646;

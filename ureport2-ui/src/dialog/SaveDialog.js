@@ -60,7 +60,7 @@ export default class SaveDialog{
                 tr.append(`<td style="vertical-align: middle">${formatDate(file.updateDate)}</td>`);
                 let deleteCol=$(`<td style="vertical-align: middle"></td>`);
                 tr.append(deleteCol);
-                let deleteIcon=$(`<a href="###"><i class="glyphicon glyphicon-trash" style="color: red;font-size: 14pt"></i></a>`);
+                let deleteIcon=$(`<a ><i class="glyphicon glyphicon-trash" style="color: red;font-size: 14pt"></i></a>`);
                 deleteCol.append(deleteIcon);
                 deleteIcon.click(function(){
                     confirm(`${window.i18n.dialog.save.delConfirm}`+file.name,function(){
@@ -127,9 +127,10 @@ export default class SaveDialog{
                     _this.context.fileInfo.setFile(fileName);
                     resetDirty();
                     _this.dialog.modal('hide');
-                    let path="designer?template="+window._reportFile;
+                    // let path="designer?template="+window._reportFile;
                     confirm(`另存为成功，是否打开另存为文件`,function (){
-                        window.open("/#/"+path, "_blank");
+                        // window.open("/#/"+path, "_blank");
+                        vueRoute('/designer',{template: window._reportFile})
                     });
                 },
                 error:function(response){

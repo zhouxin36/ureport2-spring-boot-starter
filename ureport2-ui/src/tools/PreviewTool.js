@@ -16,7 +16,7 @@ export default class PreviewTool extends Tool{
         </button>`);
         const ul=$(`<ul class="dropdown-menu" role="menu"></ul>`);
         const preview=$(`<li>
-                <a href="###">
+                <a>
                     <i class="ureport ureport-preview" style="color: #0e90d2;"></i> ${window.i18n.tools.preview.view}
                 </a>
             </li>`);
@@ -26,7 +26,7 @@ export default class PreviewTool extends Tool{
             _this.doPreview();
         });
         const pagingPreview=$(`<li>
-                <a href="###">
+                <a>
                     <i class="glyphicon glyphicon-search" style="color: #0e90d2;"></i> ${window.i18n.tools.preview.pagingPreview}
                 </a>
             </li>`);

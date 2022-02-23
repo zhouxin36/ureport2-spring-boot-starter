@@ -435,7 +435,7 @@ export default class DatasetValueEditor extends BaseValueEditor{
                 _this.mappingTbody.append(tr);
                 const td=$(`<td style="vertical-align: middle"></td>`);
                 tr.append(td);
-                const delLink=$(`<a href="###"><i class="glyphicon glyphicon-trash" style="font-size: 16px;color: #d30e00;"></i></a>`);
+                const delLink=$(`<a ><i class="glyphicon glyphicon-trash" style="font-size: 16px;color: #d30e00;"></i></a>`);
                 td.append(delLink);
                 delLink.click(function(){
                     confirm(`${window.i18n.property.dataset.delConfirm}`,function(){
@@ -445,7 +445,7 @@ export default class DatasetValueEditor extends BaseValueEditor{
                     });
                 });
 
-                const editLink=$(`<a href="###" style="margin-left: 10px"><i class="glyphicon glyphicon-pencil" style="font-size: 16px;color: #005fd3;"></i></a>`);
+                const editLink=$(`<a  style="margin-left: 10px"><i class="glyphicon glyphicon-pencil" style="font-size: 16px;color: #005fd3;"></i></a>`);
                 td.append(editLink);
                 editLink.click(function(){
                     _this.mappingDialog.show(function(){
@@ -666,7 +666,7 @@ export default class DatasetValueEditor extends BaseValueEditor{
             this.mappingTbody.append(tr);
             const td=$(`<td style="vertical-align: middle"></td>`);
             tr.append(td);
-            const delLink=$(`<a href="###"><i class="glyphicon glyphicon-trash" style="font-size: 16px;color: #d30e00;"></i></a>`);
+            const delLink=$(`<a ><i class="glyphicon glyphicon-trash" style="font-size: 16px;color: #d30e00;"></i></a>`);
             td.append(delLink);
             delLink.click(function(){
                 confirm(`${window.i18n.property.dataset.delConfirm}`,function(){
@@ -676,7 +676,7 @@ export default class DatasetValueEditor extends BaseValueEditor{
                 });
             });
 
-            const editLink=$(`<a href="###" style="margin-left: 10px"><i class="glyphicon glyphicon-pencil" style="font-size: 16px;color: #005fd3;"></i></a>`);
+            const editLink=$(`<a  style="margin-left: 10px"><i class="glyphicon glyphicon-pencil" style="font-size: 16px;color: #005fd3;"></i></a>`);
             td.append(editLink);
             editLink.click(function(){
                 _this.mappingDialog.show(function(){

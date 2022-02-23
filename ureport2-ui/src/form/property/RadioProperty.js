@@ -1,20 +1,15 @@
 /**
  * Created by Jacky.Gao on 2017-10-16.
  */
-import Property from './Property.js';
-export default class RadioProperty extends Property{
+import bootbox from "bootbox";
+import DatasetProperty from "@/form/property/DatasetProperty";
+export default class RadioProperty extends DatasetProperty{
     constructor(){
         super();
         this.init();
     }
     init(){
-        this.col.append(this.buildBindParameter());
-        this.positionLabelGroup=this.buildPositionLabelGroup();
-        this.col.append(this.positionLabelGroup);
-        this.col.append(this.buildLabelGroup());
         this.col.append(this.buildOptionsInlineGroup());
-        this.optionFormGroup=$("<div class='form-group'>");
-        this.col.append(this.optionFormGroup);
     }
     addRadioEditor(radio){
         var self=this;
@@ -54,12 +49,11 @@ export default class RadioProperty extends Property{
             self.addRadioEditor(newOption);
         });
         addon.append(add);
-        this.optionFormGroup.append(inputGroup);
+        this.simpleOptionGroup.append(inputGroup);
     }
     refreshValue(current){
         super.refreshValue(current);
-        this.optionFormGroup.empty();
-        this.optionFormGroup.append($("<label>选项(若显示值与实际值不同，则用“,”分隔，如“是,true”等)</label>"));
+        this.simpleOptionGroup.append($("<label>选项(若显示值与实际值不同，则用“,”分隔，如“是,true”等)</label>"));
         var self=this;
         $.each(this.current.options,function(index,checkbox){
             self.addRadioEditor(checkbox);

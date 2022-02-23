@@ -34,7 +34,7 @@ export default class AlignLeftTool extends Tool{
         </button>`);
         const ul=$(`<ul class="dropdown-menu" role="menu"></ul>`);
         const left=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-alignleft" style="color: #0e90d2;"></i> ${window.i18n.tools.alignLeft.leftAlign}
                 </a>
             </li>`);
@@ -79,7 +79,7 @@ export default class AlignLeftTool extends Tool{
             setDirty();
         });
         const center=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-aligncenter" style="color: #0e90d2;"></i> ${window.i18n.tools.alignLeft.centerAlign}
                 </a>
             </li>`);
@@ -104,7 +104,7 @@ export default class AlignLeftTool extends Tool{
         });
         ul.append(center);
         const right=$(`<li>
-                <a href="###">
+                <a >
                     <i class="ureport ureport-alignright" style="color: #0e90d2;"></i> ${window.i18n.tools.alignLeft.rightAlign}
                 </a>
             </li>`);

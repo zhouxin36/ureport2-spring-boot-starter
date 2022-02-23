@@ -1,5 +1,8 @@
 package vip.zhouxin.ureport.console.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import vip.zhouxin.ureport.console.dto.SearchFormRes;
 import vip.zhouxin.ureport.core.build.Context;
 import vip.zhouxin.ureport.core.build.ReportBuilder;
 import vip.zhouxin.ureport.core.build.paging.Page;
@@ -40,6 +43,7 @@ import java.util.Map;
 @RestController
 public class HtmlPreviewController extends AbstractController {
 
+    private static final Logger logger = LoggerFactory.getLogger(HtmlPreviewController.class);
     public static final String PREFIX = CONTENT + "/preview";
 
     private final ExportManager exportManager;
@@ -62,9 +66,7 @@ public class HtmlPreviewController extends AbstractController {
         try {
             htmlReport = loadReport(req);
         } catch (Exception ex) {
-            if (!(ex instanceof ReportDesignException)) {
-                ex.printStackTrace();
-            }
+            logger.error("",ex);
             errorMsg = buildExceptionMessage(ex);
         }
         String title = buildTitle(req);
@@ -130,6 +132,28 @@ public class HtmlPreviewController extends AbstractController {
         return res;
     }
 
+    @RequestMapping(value = PREFIX + "/loadSearchForm", method = RequestMethod.POST)
+    public SearchFormRes loadSearchForm(@RequestBody PreviewReq req) {
+        SearchFormRes res = new SearchFormRes();
+        HtmlReport htmlReport;
+        try {
+            htmlReport = loadReport(req);
+        } catch (Exception ex) {
+            logger.error("",ex);
+            return res;
+        }
+        SearchFormData formData = htmlReport.getSearchFormData();
+        if (formData != null) {
+            if (formData.getFormPosition().equals(FormPosition.up)) {
+                res.setUpSearchFormHtml(formData.getHtml());
+                res.setDownSearchFormHtml("");
+            } else {
+                res.setDownSearchFormHtml(formData.getHtml());
+                res.setUpSearchFormHtml("");
+            }
+        }
+        return res;
+    }
     @RequestMapping(value = PREFIX + "/loadData", method = RequestMethod.POST)
     public HtmlReport loadData(@RequestBody PreviewReq req) {
         return loadReport(req);

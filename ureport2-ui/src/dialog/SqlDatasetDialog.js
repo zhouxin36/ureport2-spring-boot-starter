@@ -257,7 +257,7 @@ export default class SqlDatasetDialog{
                 _this.tableBody.empty();
                 for(let table of tables){
                     const tr=$(`<tr style="height: 30px"></tr>`);
-                    const nameTD=$(`<td style="vertical-align: middle"><a href="###" title="${window.i18n.dialog.sql.addSql}">${table.name}</a></td>`);
+                    const nameTD=$(`<td style="vertical-align: middle"><a  title="${window.i18n.dialog.sql.addSql}">${table.name}</a></td>`);
                     tr.append(nameTD);
                     nameTD.dblclick(function(){
                         const sql="select * from "+table.name+"";
