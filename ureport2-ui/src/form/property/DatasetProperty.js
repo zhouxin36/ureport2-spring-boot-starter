@@ -1,7 +1,7 @@
 /**
  * Created by xinxingzhou on 2022/2/23.
  */
-import InputProperty from "@/form/property/InputProperty";
+import InputProperty from "./InputProperty.js";
 
 export default class DatasetProperty extends InputProperty{
     constructor(report){

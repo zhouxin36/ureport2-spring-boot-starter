@@ -1,7 +1,7 @@
 /**
  * Created by xinxingzhou on 2022/2/23.
  */
-import Property from "@/form/property/Property";
+import Property from "./Property.js";
 
 export default class InputProperty extends Property{
     constructor(report){

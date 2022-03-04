@@ -1,7 +1,7 @@
 /**
  * Created by Jacky.Gao on 2017-10-16.
  */
-import InputProperty from "@/form/property/InputProperty";
+import InputProperty from "./InputProperty.js";
 export default class TextProperty extends InputProperty{
     constructor(report){
         super();

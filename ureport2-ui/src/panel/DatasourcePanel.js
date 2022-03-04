@@ -7,7 +7,7 @@ import BuildinTree from '../tree/BuildinTree.js';
 import DatasourceDialog from '../dialog/DatasourceDialog.js';
 import SpringDialog from '../dialog/SpringDialog.js';
 import BuildinDatasourceSelectDialog from '../dialog/BuildinDatasourceSelectDialog.js';
-import {alert, confirm} from "@/MsgBox";
+import {alert, confirm} from "../MsgBox";
 
 export default class DatasourcePanel{
     constructor(context){

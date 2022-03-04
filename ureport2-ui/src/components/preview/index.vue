@@ -3,7 +3,7 @@
 <script type="text/javascript">
   window._server = "http://localhost:9095/ureport";
   import "../../../public/css/bootstrap.min.css";
-  import {submitSearchForm, previewInit, loadSearchForm} from '@/preview';
+  import {submitSearchForm, previewInit, loadSearchForm} from '../../preview.js';
   window.formElements = [];
 
   window.doSearch = function () {

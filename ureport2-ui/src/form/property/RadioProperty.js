@@ -2,7 +2,7 @@
  * Created by Jacky.Gao on 2017-10-16.
  */
 import bootbox from "bootbox";
-import DatasetProperty from "@/form/property/DatasetProperty";
+import DatasetProperty from "./DatasetProperty.js";
 export default class RadioProperty extends DatasetProperty{
     constructor(){
         super();
